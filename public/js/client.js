@@ -1867,21 +1867,21 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     remoteAudioStatusIcon.setAttribute('id', peer_id + '_audioStatus');
     remoteAudioStatusIcon.className = 'fas fa-microphone';
 
-    // // remote private message
-    // remotePrivateMsgBtn.setAttribute('id', peer_id + '_privateMsg');
-    // remotePrivateMsgBtn.className = 'fas fa-paper-plane';
+    // remote private message
+    remotePrivateMsgBtn.setAttribute('id', peer_id + '_privateMsg');
+    remotePrivateMsgBtn.className = 'fas fa-paper-plane';
 
-    // // remote share file
-    // remoteFileShareBtn.setAttribute('id', peer_id + '_shareFile');
-    // remoteFileShareBtn.className = 'fas fa-upload';
+    // remote share file
+    remoteFileShareBtn.setAttribute('id', peer_id + '_shareFile');
+    remoteFileShareBtn.className = 'fas fa-upload';
 
-    // // remote peer YouTube video
-    // remoteVideoAudioUrlBtn.setAttribute('id', peer_id + '_videoAudioUrl');
-    // remoteVideoAudioUrlBtn.className = 'fab fa-youtube';
+    // remote peer YouTube video
+    remoteVideoAudioUrlBtn.setAttribute('id', peer_id + '_videoAudioUrl');
+    remoteVideoAudioUrlBtn.className = 'fab fa-youtube';
 
-    // // my video to image
-    // remoteVideoToImgBtn.setAttribute('id', peer_id + '_snapshot');
-    // remoteVideoToImgBtn.className = 'fas fa-camera-retro';
+    // my video to image
+    remoteVideoToImgBtn.setAttribute('id', peer_id + '_snapshot');
+    remoteVideoToImgBtn.className = 'fas fa-camera-retro';
 
     // remote peer kick out
     remotePeerKickOut.setAttribute('id', peer_id + '_kickOut');
