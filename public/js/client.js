@@ -1870,14 +1870,17 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     // remote private message
     remotePrivateMsgBtn.setAttribute('id', peer_id + '_privateMsg');
     remotePrivateMsgBtn.className = 'fas fa-paper-plane';
+    remotePrivateMsgBtn.style.display = "none";
 
     // remote share file
     remoteFileShareBtn.setAttribute('id', peer_id + '_shareFile');
     remoteFileShareBtn.className = 'fas fa-upload';
+    remoteFileShareBtn.style.display = "none";
 
     // remote peer YouTube video
     remoteVideoAudioUrlBtn.setAttribute('id', peer_id + '_videoAudioUrl');
     remoteVideoAudioUrlBtn.className = 'fab fa-youtube';
+    remoteVideoAudioUrlBtn.style.display = "none";
 
     // my video to image
     remoteVideoToImgBtn.setAttribute('id', peer_id + '_snapshot');
