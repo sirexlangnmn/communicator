@@ -863,7 +863,7 @@ async function whoAreYou() {
         background: swalBackground,
         position: 'center',
         imageAlt: 'mirotalk-name',
-        imageUrl: welcomeImg,
+        // imageUrl: welcomeImg,
         title: 'Enter your name',
         input: 'text',
         inputValue: window.localStorage.peer_name ? window.localStorage.peer_name : '',

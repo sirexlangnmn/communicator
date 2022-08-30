@@ -140,11 +140,11 @@ const views = {
     // landing: path.join(__dirname, '../../', 'public/views/landing.html'),
     landing: path.join(__dirname, '../../', 'public/views/landing2.html'),
     newCall: path.join(__dirname, '../../', 'public/views/newcall.html'),
-    notFound: path.join(__dirname, '../../', 'public/views/404.html'),
+    // notFound: path.join(__dirname, '../../', 'public/views/404.html'),
+    notFound: path.join(__dirname, '../../', 'public/views/404-not-found.html'),
     permission: path.join(__dirname, '../../', 'public/views/permission.html'),
     privacy: path.join(__dirname, '../../', 'public/views/privacy.html'),
     stunTurn: path.join(__dirname, '../../', 'public/views/testStunTurn.html'),
-    notFound404: path.join(__dirname, '../../', 'public/views/404-not-found.html'),
 };
 
 let channels = {}; // collect channels
