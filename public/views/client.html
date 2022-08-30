@@ -13,8 +13,8 @@
         <!-- Title and Icon -->
 
         <title>MiroTalk WebRTC Video call, Chat Room & Screen Sharing.</title>
-        <link rel="shortcut icon" href="../images/logo.svg" />
-        <link rel="apple-touch-icon" href="../images/logo.svg" />
+        <!-- <link rel="shortcut icon" href="../images/logo.svg" />
+        <link rel="apple-touch-icon" href="../images/logo.svg" /> -->
 
         <!-- Meta Information -->
 
@@ -80,22 +80,24 @@ access to use this app.
         https://fontawesome.com/icons?d=gallery
         -->
 
-        <div id="buttonsBar" class="fadein">
+        <div id="buttonsBar" class="fadein toolbox-content-items">
             <button id="shareRoomBtn" class="fas fa-users"></button>
             <button id="audioBtn" class="fas fa-microphone"></button>
             <button id="videoBtn" class="fas fa-video"></button>
             <button id="swapCameraBtn" class="fas fa-camera-rotate"></button>
             <button id="screenShareBtn" class="fas fa-desktop"></button>
-            <button id="recordStreamBtn" class="fas fa-record-vinyl"></button>
             <button id="fullScreenBtn" class="fas fa-expand-alt"></button>
             <button id="chatRoomBtn" class="fas fa-comment"></button>
-            <button id="captionBtn" class="fas fa-closed-captioning"></button>
             <button id="myHandBtn" class="fas fa-hand-paper"></button>
-            <button id="whiteboardBtn" class="fas fa-chalkboard-teacher"></button>
             <button id="fileShareBtn" class="fas fa-folder-open"></button>
             <button id="mySettingsBtn" class="fas fa-cogs"></button>
-            <button id="aboutBtn" class="fas fa-question"></button>
             <button id="leaveRoomBtn" class="fas fa-right-from-bracket"></button>
+            <div style="display: none">
+                <button id="recordStreamBtn" class="fas fa-record-vinyl"></button>
+                <button id="captionBtn" class="fas fa-closed-captioning"></button>
+                <button id="whiteboardBtn" class="fas fa-chalkboard-teacher"></button>
+                <button id="aboutBtn" class="fas fa-question"></button>
+            </div>
         </div>
         <!-- End left buttons -->
 

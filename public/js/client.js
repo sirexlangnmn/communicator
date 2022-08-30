@@ -973,7 +973,7 @@ function welcomeUser() {
         position: 'center',
         title: '<strong>Welcome ' + myPeerName + '</strong>',
         imageAlt: 'mirotalk-welcome',
-        imageUrl: welcomeImg,
+        // imageUrl: welcomeImg,
         html:
             `
         <br/> 
