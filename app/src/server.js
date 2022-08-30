@@ -137,7 +137,8 @@ const dir = {
 const views = {
     about: path.join(__dirname, '../../', 'public/views/about.html'),
     client: path.join(__dirname, '../../', 'public/views/client.html'),
-    landing: path.join(__dirname, '../../', 'public/views/landing.html'),
+    // landing: path.join(__dirname, '../../', 'public/views/landing.html'),
+    landing: path.join(__dirname, '../../', 'public/views/landing2.html'),
     newCall: path.join(__dirname, '../../', 'public/views/newcall.html'),
     notFound: path.join(__dirname, '../../', 'public/views/404.html'),
     permission: path.join(__dirname, '../../', 'public/views/permission.html'),
@@ -178,6 +179,7 @@ app.use((err, req, res, next) => {
 app.get(['/'], (req, res) => {
     res.sendFile(views.landing);
 });
+
 
 // mirotalk about
 // app.get(['/about'], (req, res) => {
