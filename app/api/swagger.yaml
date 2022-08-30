@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-    title: MiroTalk API
+    title: AllWorldTrade API
     description: API description for external applications that integrates with MiroTalk.
     version: 1.0.0
 

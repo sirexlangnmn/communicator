@@ -47,7 +47,7 @@ const Log = {
     },
 };
 module.exports = class Logger {
-    constructor(appName = 'miroTalkP2P', debugOn = true) {
+    constructor(appName = 'allworldtradeP2P', debugOn = true) {
         this.appName = Log.fg.yellow + appName + Log.ac.reset;
         this.debugOn = debugOn;
         this.timeStart = Date.now();

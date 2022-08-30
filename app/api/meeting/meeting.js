@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const API_KEY = 'mirotalk_default_secret';
+const API_KEY = 'all_world_trade_default_secret';
 // const MIROTALK_URL = 'http://localhost:3000/api/v1/meeting';
 // const MIROTALK_URL = 'https://p2p.mirotalk.com/api/v1/meeting';
 // const MIROTALK_URL = 'https://mirotalk.up.railway.app/api/v1/meeting';

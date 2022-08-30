@@ -80,7 +80,7 @@ const swaggerDocument = yamlJS.load(path.join(__dirname + '/../api/swagger.yaml'
 const { v4: uuidV4 } = require('uuid');
 const apiBasePath = '/api/v1'; // api endpoint path
 const api_docs = host + apiBasePath + '/docs'; // api docs
-const api_key_secret = process.env.API_KEY_SECRET || 'mirotalk_default_secret';
+const api_key_secret = process.env.API_KEY_SECRET || 'all_world_trade_default_secret';
 
 // Ngrok config
 const ngrok = require('ngrok');
@@ -181,7 +181,7 @@ app.get(['/'], (req, res) => {
 });
 
 
-// mirotalk about
+// AllWorldTrade about
 // app.get(['/about'], (req, res) => {
 //     res.sendFile(views.about);
 // });
@@ -202,18 +202,18 @@ app.get(['/'], (req, res) => {
 // });
 
 // test Stun and Turn connections
-app.get(['/test'], (req, res) => {
-    if (Object.keys(req.query).length > 0) {
-        log.debug('Request Query', req.query);
-    }
-    /*
-        http://localhost:3000/test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
-        https://p2p.mirotalk.com//test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
-        https://mirotalk.up.railway.app/test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
-        https://mirotalk.herokuapp.com/test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
-    */
-    res.sendFile(views.stunTurn);
-});
+// app.get(['/test'], (req, res) => {
+//     if (Object.keys(req.query).length > 0) {
+//         log.debug('Request Query', req.query);
+//     }
+//     /*
+//         http://localhost:3000/test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
+//         https://p2p.mirotalk.com//test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
+//         https://mirotalk.up.railway.app/test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
+//         https://mirotalk.herokuapp.com/test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
+//     */
+//     res.sendFile(views.stunTurn);
+// });
 
 // no room name specified to join
 app.get('/join/', (req, res) => {
@@ -240,7 +240,7 @@ app.get('/join/*', (req, res) => {
 });
 
 /**
-    MiroTalk API v1
+    AllWorldTrade API v1
     For api docs we use: https://swagger.io/
 */
 
@@ -252,7 +252,7 @@ app.post([apiBasePath + '/meeting'], (req, res) => {
     // check if user was authorized for the api call
     let authorization = req.headers.authorization;
     if (authorization != api_key_secret) {
-        log.debug('MiroTalk get meeting - Unauthorized', {
+        log.debug('AllWorldTrade get meeting - Unauthorized', {
             header: req.headers,
             body: req.body,
         });
@@ -265,7 +265,7 @@ app.post([apiBasePath + '/meeting'], (req, res) => {
     res.end(JSON.stringify({ meeting: meetingURL }));
 
     // log.debug the output if all done
-    log.debug('MiroTalk get meeting - Authorized', {
+    log.debug('AllWorldTrade get meeting - Authorized', {
         header: req.headers,
         body: req.body,
         meeting: meetingURL,
@@ -273,7 +273,7 @@ app.post([apiBasePath + '/meeting'], (req, res) => {
 });
 
 /*
-    MiroTalk Slack app v1
+    AllWorldTrade Slack app v1
     https://api.slack.com/authentication/verifying-requests-from-slack
 */
 
@@ -316,7 +316,7 @@ function getMeetingURL(host) {
     return 'http' + (host.includes('localhost') ? '' : 's') + '://' + host + '/join/' + uuidV4();
 }
 
-// end of MiroTalk API v1
+// end of AllWorldTrade API v1
 
 // not match any of page before, so 404 not found
 app.get('*', function (req, res) {

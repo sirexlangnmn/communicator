@@ -998,7 +998,7 @@ function welcomeUser() {
         } else if (result.isDenied) {
             let message = {
                 email: '',
-                subject: 'Please join our MiroTalk Video Chat Meeting',
+                subject: 'Please join our AllWorldTrade Video Chat Meeting',
                 body: 'Click to join: ' + myRoomUrl,
             };
             shareRoomByEmail(message);
@@ -1365,7 +1365,7 @@ function handleRemovePeer(config) {
 }
 
 /**
- * Set mirotalk theme | dark | grey | ...
+ * Set AllWorldTrade theme | dark | grey | ...
  * @param {string} theme type
  */
 function setTheme(theme) {
@@ -3314,7 +3314,7 @@ async function shareRoomUrl() {
             } else if (result.isDenied) {
                 let message = {
                     email: '',
-                    subject: 'Please join our MiroTalk Video Chat Meeting',
+                    subject: 'Please join our AllWorldTrade Video Chat Meeting',
                     body: 'Click to join: ' + myRoomUrl,
                 };
                 shareRoomByEmail(message);
@@ -6304,7 +6304,7 @@ function handleKickedOut(config) {
 }
 
 /**
- * MiroTalk about info
+ * AllWorldTrade about info
  */
 function showAbout() {
     playSound('newMessage');
@@ -6322,7 +6322,7 @@ function showAbout() {
             <br/><br/>
             <button class="pulsate umami--click--sponsor" onclick="window.open('https://github.com/sponsors/miroslavpejic85?o=esb')"><i class="fas fa-heart" ></i>&nbsp;Support</button>
             <br /><br />
-            Author:<a href="https://www.linkedin.com/in/miroslav-pejic-976a07101/" class="umami--click--linkedin" target="_blank"> Miroslav Pejic</a>
+            Author:<a href="" class="umami--click--linkedin" target="_blank"> Miroslav Pejic</a>
         </div>
         `,
         showClass: {
