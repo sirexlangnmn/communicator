@@ -143,6 +143,7 @@ const views = {
     permission: path.join(__dirname, '../../', 'public/views/permission.html'),
     privacy: path.join(__dirname, '../../', 'public/views/privacy.html'),
     stunTurn: path.join(__dirname, '../../', 'public/views/testStunTurn.html'),
+    notFound404: path.join(__dirname, '../../', 'public/views/404-not-found.html'),
 };
 
 let channels = {}; // collect channels
@@ -179,24 +180,24 @@ app.get(['/'], (req, res) => {
 });
 
 // mirotalk about
-app.get(['/about'], (req, res) => {
-    res.sendFile(views.about);
-});
+// app.get(['/about'], (req, res) => {
+//     res.sendFile(views.about);
+// });
 
 // set new room name and join
-app.get(['/newcall'], (req, res) => {
-    res.sendFile(views.newCall);
-});
+// app.get(['/newcall'], (req, res) => {
+//     res.sendFile(views.newCall);
+// });
 
 // if not allow video/audio
-app.get(['/permission'], (req, res) => {
-    res.sendFile(views.permission);
-});
+// app.get(['/permission'], (req, res) => {
+//     res.sendFile(views.permission);
+// });
 
 // privacy policy
-app.get(['/privacy'], (req, res) => {
-    res.sendFile(views.privacy);
-});
+// app.get(['/privacy'], (req, res) => {
+//     res.sendFile(views.privacy);
+// });
 
 // test Stun and Turn connections
 app.get(['/test'], (req, res) => {
@@ -228,7 +229,7 @@ app.get('/join/', (req, res) => {
             return res.sendFile(views.client);
         }
     }
-    res.redirect('/');
+    // res.redirect('/');
 });
 
 // Join Room *
