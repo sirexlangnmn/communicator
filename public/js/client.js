@@ -6235,7 +6235,7 @@ function kickOut(peer_id) {
     Swal.fire({
         background: swalBackground,
         position: 'center',
-        imageUrl: confirmImg,
+        // imageUrl: confirmImg,
         title: 'Kick out ' + pName,
         text: 'Are you sure you want to kick out this participant?',
         showDenyButton: true,
@@ -6274,7 +6274,7 @@ function handleKickedOut(config) {
         allowOutsideClick: false,
         background: swalBackground,
         position: 'center',
-        imageUrl: kickedOutImg,
+        // imageUrl: kickedOutImg,
         title: 'Kicked out!',
         html:
             `<h2 style="color: #FF2D00;">` +
