@@ -1832,11 +1832,11 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     const remoteHandStatusIcon = document.createElement('button');
     const remoteVideoStatusIcon = document.createElement('button');
     const remoteAudioStatusIcon = document.createElement('button');
-    const remoteVideoAudioUrlBtn = document.createElement('button');
-    const remoteFileShareBtn = document.createElement('button');
-    const remotePrivateMsgBtn = document.createElement('button');
+    // const remoteVideoAudioUrlBtn = document.createElement('button');
+    // const remoteFileShareBtn = document.createElement('button');
+    // const remotePrivateMsgBtn = document.createElement('button');
     const remotePeerKickOut = document.createElement('button');
-    const remoteVideoToImgBtn = document.createElement('button');
+    // const remoteVideoToImgBtn = document.createElement('button');
     const remoteVideoFullScreenBtn = document.createElement('button');
     const remoteVideoAvatarImage = document.createElement('img');
     const remotePitchMeter = document.createElement('div');
@@ -1867,21 +1867,21 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     remoteAudioStatusIcon.setAttribute('id', peer_id + '_audioStatus');
     remoteAudioStatusIcon.className = 'fas fa-microphone';
 
-    // remote private message
-    remotePrivateMsgBtn.setAttribute('id', peer_id + '_privateMsg');
-    remotePrivateMsgBtn.className = 'fas fa-paper-plane';
+    // // remote private message
+    // remotePrivateMsgBtn.setAttribute('id', peer_id + '_privateMsg');
+    // remotePrivateMsgBtn.className = 'fas fa-paper-plane';
 
-    // remote share file
-    remoteFileShareBtn.setAttribute('id', peer_id + '_shareFile');
-    remoteFileShareBtn.className = 'fas fa-upload';
+    // // remote share file
+    // remoteFileShareBtn.setAttribute('id', peer_id + '_shareFile');
+    // remoteFileShareBtn.className = 'fas fa-upload';
 
-    // remote peer YouTube video
-    remoteVideoAudioUrlBtn.setAttribute('id', peer_id + '_videoAudioUrl');
-    remoteVideoAudioUrlBtn.className = 'fab fa-youtube';
+    // // remote peer YouTube video
+    // remoteVideoAudioUrlBtn.setAttribute('id', peer_id + '_videoAudioUrl');
+    // remoteVideoAudioUrlBtn.className = 'fab fa-youtube';
 
-    // my video to image
-    remoteVideoToImgBtn.setAttribute('id', peer_id + '_snapshot');
-    remoteVideoToImgBtn.className = 'fas fa-camera-retro';
+    // // my video to image
+    // remoteVideoToImgBtn.setAttribute('id', peer_id + '_snapshot');
+    // remoteVideoToImgBtn.className = 'fas fa-camera-retro';
 
     // remote peer kick out
     remotePeerKickOut.setAttribute('id', peer_id + '_kickOut');
@@ -1897,10 +1897,10 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
         setTippy(remoteHandStatusIcon, 'Participant hand is raised', 'bottom');
         setTippy(remoteVideoStatusIcon, 'Participant video is on', 'bottom');
         setTippy(remoteAudioStatusIcon, 'Participant audio is on', 'bottom');
-        setTippy(remoteVideoAudioUrlBtn, 'Send Video or Audio', 'bottom');
-        setTippy(remotePrivateMsgBtn, 'Send private message', 'bottom');
-        setTippy(remoteFileShareBtn, 'Send file', 'bottom');
-        setTippy(remoteVideoToImgBtn, 'Take a snapshot', 'bottom');
+        // setTippy(remoteVideoAudioUrlBtn, 'Send Video or Audio', 'bottom');
+        // setTippy(remotePrivateMsgBtn, 'Send private message', 'bottom');
+        // setTippy(remoteFileShareBtn, 'Send file', 'bottom');
+        // setTippy(remoteVideoToImgBtn, 'Take a snapshot', 'bottom');
         setTippy(remotePeerKickOut, 'Kick out', 'bottom');
         setTippy(remoteVideoFullScreenBtn, 'Full screen mode', 'bottom');
     }
@@ -1924,10 +1924,10 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     remoteStatusMenu.appendChild(remoteHandStatusIcon);
     remoteStatusMenu.appendChild(remoteVideoStatusIcon);
     remoteStatusMenu.appendChild(remoteAudioStatusIcon);
-    remoteStatusMenu.appendChild(remotePrivateMsgBtn);
-    remoteStatusMenu.appendChild(remoteFileShareBtn);
-    remoteStatusMenu.appendChild(remoteVideoAudioUrlBtn);
-    remoteStatusMenu.appendChild(remoteVideoToImgBtn);
+    // remoteStatusMenu.appendChild(remotePrivateMsgBtn);
+    // remoteStatusMenu.appendChild(remoteFileShareBtn);
+    // remoteStatusMenu.appendChild(remoteVideoAudioUrlBtn);
+    // remoteStatusMenu.appendChild(remoteVideoToImgBtn);
     if (buttons.remote.showKickOutBtn) remoteStatusMenu.appendChild(remotePeerKickOut);
     remoteStatusMenu.appendChild(remoteVideoFullScreenBtn);
 
