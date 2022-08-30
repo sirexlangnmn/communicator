@@ -1,8 +1,90 @@
-<%- include('../includes/head/index.ejs') %>
+<!-- includes/head/index.ejs START-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>All World Trade - Home</title>
+
+        <link href="uploads/placeholder/logo-placeholder2.jpg" rel="icon" type="image/png" />
+        <meta name="description" content="All World Trade - Home" />
+
+        <link rel="stylesheet" href="assets/css/icons.css" />
+        <link rel="stylesheet" href="assets/css/uikit.css" />
+        <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="stylesheet" href="assets/css/custom.css" />
+        <link rel="stylesheet" href="assets/css/tailwind.min.css" />
+        <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">  -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.0/sweetalert2.min.css"
+            rel="stylesheet"
+        />
+        <script src="assets/js/global.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
+    </head>
+</html>
+<!-- includes/head/index.ejs END-->
+
 <body>
     <div id="wrapper" class="is-collapse is-active">
         <!-- === HEADER - START === -->
-        <%- include('../includes/header/index.ejs') %>
+        
+        <header>
+            <div class="header_wrap">
+                <div class="header_inner mcontainer">
+                    <div class="left_side">
+                        <div id="logo">
+                            <a href="" style="vertical-align: middle;">
+                                <!-- === LOGO - START === -->           
+                                <!-- for wide screen  -->
+                                <!-- <img src="uploads/logo/rectangle-logo.png" style="height: 160px; margin-bottom: 5px" alt="" /> -->
+                                <img src="uploads/logo/logo-long-with-text-black2_adobe_express.svg" style="height: 60px; margin-bottom: 0px" id="navLogo" alt="All World Trade" />
+
+                                <img
+                                    src="uploads/logo/rectangle-logo.png"
+                                    class="logo_mobile"
+                                    style="height: 160px; margin-bottom: 5px"
+                                    alt=""
+                                /><!-- for small screen -->
+                                <!-- === LOGO - END === -->
+                            </a>
+                        </div>
+                    </div>
+                    <!-- === NAVIGATION - START === -->
+                    <div class="header_search">
+                        <!-- === NAVIGATION ICON - START === -->
+                        
+                        <!-- === NAVIGATION ICON - END === -->
+                    </div>
+                    <!-- === NAVIGATION - END === -->
+                    <div class="right_side">
+                        <div class="header_widgets">
+                            <!-- === CART - START === -->
+                   
+                            <!-- === CART - END === -->
+
+                            <!-- === NOTIFICATIONS - START === -->
+                          
+                            <!-- === NOTIFICATIONS - END === -->
+
+                            <!-- === MESSAGES - START === -->
+                        
+                            <!-- === MESSAGES - END === -->
+
+                            <!-- === AVATAR - START === -->
+                          
+                            <!-- === AVATAR - END === -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
         <!-- === HEADER - END === -->
 
         <!-- === BIG IMAGE - PARRALAX DAPAT ITO - START === -->
@@ -4968,6 +5050,21 @@
     
     
 
-    <%- include('../includes/scripts/index.ejs') %>
+    <!-- <script src="assets/js/toggle-dark-light.js"></script> -->
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"
+    ></script>
+    <!-- <script src="assets/js/global.js"></script> -->
+    <script src="assets/js/tippy.all.min.js"></script>
+    <script src="assets/js/uikit.js"></script>
+    <script src="assets/js/simplebar.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script> -->
+    <!-- <script src="assets/css/slim-scroll-master/dist/slimscroll.min.js"></script> -->
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/bootstrap-select.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+    <!-- <script src="assets/js/check-user-level.js"></script> -->
   </body>
   </html>
