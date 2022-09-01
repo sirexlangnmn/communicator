@@ -17,6 +17,13 @@
     right: 0px;
 }
 
+
+
+.mystyle:fullscreen {
+    object-fit: contain !important;
+    opacity: 1 !important;
+}
+
 .Camera {
     position: relative;
     vertical-align: middle;

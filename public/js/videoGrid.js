@@ -82,6 +82,7 @@ function resizeVideoMedia() {
     }
 
     max = max - Margin * 2;
+    // setWidth(videoMediaContainer, Cameras, max, bigWidth, Margin, Height);
     setWidth(videoMediaContainer, Cameras, max, bigWidth, Margin, Height);
 }
 
@@ -95,6 +96,7 @@ function resizeVideoMedia() {
  * @param {integer} maxHeight
  */
 function setWidth(videoMediaContainer, Cameras, width, bigWidth, margin, maxHeight) {
+    
     ratio = customRatio ? 0.68 : ratio;
     let isOneVideoElement = videoMediaContainer.childElementCount == 1 ? true : false;
     for (let s = 0; s < Cameras.length; s++) {
@@ -109,6 +111,45 @@ function setWidth(videoMediaContainer, Cameras, width, bigWidth, margin, maxHeig
         }
     }
 }
+
+function videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id) {
+      
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    ratio = customRatio ? 0.68 : ratio;
+    var styles = {
+        "width": w+"px",
+        "height": h+"px"
+    };
+        
+    if (peer_id) {
+        var obj = document.getElementById(peer_id + '_videoWrap');
+        Object.assign(obj.style, styles);
+
+        Cameras[0].style.width = 0 + 'px';
+        Cameras[0].style.margin = 0 + 'px';
+        Cameras[0].style.height = 0 * ratio + 'px';
+        
+        Cameras[0].style.width = 0 + 'px';
+        Cameras[0].style.height = 0 * ratio + 'px';
+        let camHeigh = Cameras[0].style.height.substring(0, Cameras[0].style.height.length - 2);
+        if (camHeigh >= maxHeight) Cameras[0].style.height = maxHeight - 2 + 'px';
+    } else {
+        var obj = document.getElementById('myVideoWrap');
+        Object.assign(obj.style, styles);
+
+        Cameras[1].style.width = 0 + 'px';
+        Cameras[1].style.margin = 0 + 'px';
+        Cameras[1].style.height = 0 * ratio + 'px';
+        
+        Cameras[1].style.width = 0 + 'px';
+        Cameras[1].style.height = 0 * ratio + 'px';
+        let camHeigh = Cameras[1].style.height.substring(0, Cameras[1].style.height.length - 2);
+        if (camHeigh >= maxHeight) Cameras[1].style.height = maxHeight - 2 + 'px';
+    }
+        
+}
+
 
 /**
  * Handle window event listener

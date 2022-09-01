@@ -1736,8 +1736,6 @@ async function loadLocalMedia(stream) {
     localMedia.volume = 0;
     localMedia.controls = false;
 
-    
-
     videoWrap.className = 'Camera';
     videoWrap.setAttribute('id', 'myVideoWrap');
 
@@ -2135,7 +2133,6 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
 
     // handle Chrome Firefox Opera Microsoft Edge videoPlayer ESC
     videoPlayer.addEventListener('fullscreenchange', (e) => {
-        // alert('fullscreenchange');
         // if Controls enabled, or document on FS do nothing
         if (videoPlayer.controls || isDocumentOnFullScreen) return;
         let fullscreenElement = document.fullscreenElement;
@@ -2144,14 +2141,10 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
             isVideoOnFullScreen = false;
             // console.log("Esc FS isVideoOnFullScreen", isVideoOnFullScreen);
         }
-
-        
     });
 
     // handle Safari videoPlayer ESC
     videoPlayer.addEventListener('webkitfullscreenchange', (e) => {
-        //  alert('webkitfullscreenchange');
-
         // if Controls enabled, or document on FS do nothing
         if (videoPlayer.controls || isDocumentOnFullScreen) return;
         let webkitIsFullScreen = document.webkitIsFullScreen;
@@ -2164,15 +2157,11 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
 
     // on button click go on FS mobile/desktop
     videoFullScreenBtn.addEventListener('click', (e) => {
-        // alert('videoFullScreenBtn click');
-        let Cameras = getEcN('Camera');
-        videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id);
-        // gotoFS();
+        gotoFS();
     });
 
     // on video click go on FS
     videoPlayer.addEventListener('click', (e) => {
-        // alert('videoPlayer click');
         // not mobile on click go on FS or exit from FS
         if (!isMobileDevice) {
             gotoFS();
@@ -2183,10 +2172,8 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
     });
 
     function gotoFS() {
-        // alert('gotoFS');
         // handle remote peer video fs
         if (peer_id !== null) {
-            // alert('handleVideoPlayerFs gotoFS NOT null');
             let remoteVideoStatusBtn = getId(peer_id + '_videoStatus');
             if (remoteVideoStatusBtn.className === 'fas fa-video') {
                 handleFSVideo();
@@ -2194,7 +2181,6 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
                 showMsg();
             }
         } else {
-            // alert('handleVideoPlayerFs gotoFS NULL');
             // handle local video fs
             if (myVideoStatusIcon.className === 'fas fa-video' || isScreenStreaming) {
                 handleFSVideo();
@@ -2208,51 +2194,9 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
         userLog('toast', 'Full screen mode work when video is on');
     }
 
-    // function handleFSVideo() {
-    //     // alert('handleFSVideo 1');
-    //     // if Controls enabled, or document on FS do nothing
-    //     if (videoPlayer.controls || isDocumentOnFullScreen) return;
-
-    //     if (!isVideoOnFullScreen) {
-    //         if (videoPlayer.requestFullscreen) {
-    //             // Chrome Firefox Opera Microsoft Edge
-    //             videoPlayer.requestFullscreen();
-    //         } else if (videoPlayer.webkitRequestFullscreen) {
-    //             // Safari request full screen mode
-    //             videoPlayer.webkitRequestFullscreen();
-    //         } else if (videoPlayer.msRequestFullscreen) {
-    //             // IE11 request full screen mode
-    //             videoPlayer.msRequestFullscreen();
-    //         }
-    //         isVideoOnFullScreen = true;
-    //         videoPlayer.style.pointerEvents = 'none';
-    //         // console.log("Go on FS isVideoOnFullScreen", isVideoOnFullScreen);
-    //     } else {
-    //         // alert('handleFSVideo 2');
-    //         if (document.exitFullscreen) {
-    //             // Chrome Firefox Opera Microsoft Edge
-    //             document.exitFullscreen();
-    //         } else if (document.webkitCancelFullScreen) {
-    //             // Safari exit full screen mode ( Not work... )
-    //             document.webkitCancelFullScreen();
-    //         } else if (document.msExitFullscreen) {
-    //             // IE11 exit full screen mode
-    //             document.msExitFullscreen();
-    //         }
-    //         isVideoOnFullScreen = false;
-    //         videoPlayer.style.pointerEvents = 'auto';
-    //         // console.log("Esc FS isVideoOnFullScreen", isVideoOnFullScreen);
-    //     }
-    // }
-
     function handleFSVideo() {
-        // alert('handleFSVideo 1');
-        // // if Controls enabled, or document on FS do nothing
-        // if (videoPlayer.controls || isDocumentOnFullScreen) return;
-        console.log('handleFSVideo 1');
-        console.log('isVideoOnFullScreen', isVideoOnFullScreen);
-        console.log('videoPlayer', videoPlayer);
-
+        // if Controls enabled, or document on FS do nothing
+        if (videoPlayer.controls || isDocumentOnFullScreen) return;
 
         if (!isVideoOnFullScreen) {
             if (videoPlayer.requestFullscreen) {
@@ -2269,24 +2213,21 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
             videoPlayer.style.pointerEvents = 'none';
             // console.log("Go on FS isVideoOnFullScreen", isVideoOnFullScreen);
         } else {
-        //     // alert('handleFSVideo 2');
-        //     if (document.exitFullscreen) {
-        //         // Chrome Firefox Opera Microsoft Edge
-        //         document.exitFullscreen();
-        //     } else if (document.webkitCancelFullScreen) {
-        //         // Safari exit full screen mode ( Not work... )
-        //         document.webkitCancelFullScreen();
-        //     } else if (document.msExitFullscreen) {
-        //         // IE11 exit full screen mode
-        //         document.msExitFullscreen();
-        //     }
-        //     isVideoOnFullScreen = false;
-        //     videoPlayer.style.pointerEvents = 'auto';
-        //     // console.log("Esc FS isVideoOnFullScreen", isVideoOnFullScreen);
+            if (document.exitFullscreen) {
+                // Chrome Firefox Opera Microsoft Edge
+                document.exitFullscreen();
+            } else if (document.webkitCancelFullScreen) {
+                // Safari exit full screen mode ( Not work... )
+                document.webkitCancelFullScreen();
+            } else if (document.msExitFullscreen) {
+                // IE11 exit full screen mode
+                document.msExitFullscreen();
+            }
+            isVideoOnFullScreen = false;
+            videoPlayer.style.pointerEvents = 'auto';
+            // console.log("Esc FS isVideoOnFullScreen", isVideoOnFullScreen);
         }
     }
-
-    // alert('handleVideoPlayerFs last');
 }
 
 /**
