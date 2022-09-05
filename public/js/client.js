@@ -2135,6 +2135,8 @@ function setPeerChatAvatarImgName(avatar, peerName) {
  * @param {string} videoFullScreenBtnId uuid full screen btn
  * @param {string} peer_id socket.id
  */
+
+ var globalClickedPeerId;
 function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
     let videoPlayer = getId(videoId);
     let videoFullScreenBtn = getId(videoFullScreenBtnId);
@@ -2171,14 +2173,21 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
     // on button click go on FS mobile/desktop
     videoFullScreenBtn.addEventListener('click', (e) => {
         // alert('videoFullScreenBtn click');
+       
+        globalClickedPeerId = peer_id;
         let Cameras = getEcN('Camera');
-        videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id);
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+
+        setWidthOfFullScreenOfClickedPeerId(videoMediaContainer, Cameras, width, height, peer_id);
         // gotoFS();
     });
 
     if (peer_id) {
         let closeFullScreenElementId = getId(peer_id + '_closeFullScreen');
         closeFullScreenElementId.addEventListener('click', (e) => {
+            globalClickedPeerId = null;
+            
             let Cameras = getEcN('Camera');
 
             var displayNone = {
@@ -2191,10 +2200,28 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
                 Object.assign(obj.style, displayNone);
             }
 
-            // setAspectRatio(0); // 16:9
             resizeVideoMedia();
         });
     }
+
+    // if (peer_id) {
+    //     window.addEventListener('resize', reportWindowSize);
+
+    //     function reportWindowSize() {
+    //         let Cameras = getEcN('Camera');
+    //         // let width = window.innerWidth;
+    //         // let height = window.innerHeight;
+
+    //         let width = document.documentElement.clientWidth;
+    //         let height = document.documentElement.clientHeight;
+    //         console.log('peer_id sa loob ng resize', peer_id);
+    
+    //         // setWidthOfFullScreenOfClickedPeerId(videoMediaContainer, Cameras, width, height, peer_id);
+            
+    //     }
+    // }
+   
+
 
     // on video click go on FS
     videoPlayer.addEventListener('click', (e) => {
@@ -2230,46 +2257,14 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
         }
     }
 
+
+   
+    
     function showMsg() {
         userLog('toast', 'Full screen mode work when video is on');
     }
 
-    // function handleFSVideo() {
-    //     // alert('handleFSVideo 1');
-    //     // if Controls enabled, or document on FS do nothing
-    //     if (videoPlayer.controls || isDocumentOnFullScreen) return;
 
-    //     if (!isVideoOnFullScreen) {
-    //         if (videoPlayer.requestFullscreen) {
-    //             // Chrome Firefox Opera Microsoft Edge
-    //             videoPlayer.requestFullscreen();
-    //         } else if (videoPlayer.webkitRequestFullscreen) {
-    //             // Safari request full screen mode
-    //             videoPlayer.webkitRequestFullscreen();
-    //         } else if (videoPlayer.msRequestFullscreen) {
-    //             // IE11 request full screen mode
-    //             videoPlayer.msRequestFullscreen();
-    //         }
-    //         isVideoOnFullScreen = true;
-    //         videoPlayer.style.pointerEvents = 'none';
-    //         // console.log("Go on FS isVideoOnFullScreen", isVideoOnFullScreen);
-    //     } else {
-    //         // alert('handleFSVideo 2');
-    //         if (document.exitFullscreen) {
-    //             // Chrome Firefox Opera Microsoft Edge
-    //             document.exitFullscreen();
-    //         } else if (document.webkitCancelFullScreen) {
-    //             // Safari exit full screen mode ( Not work... )
-    //             document.webkitCancelFullScreen();
-    //         } else if (document.msExitFullscreen) {
-    //             // IE11 exit full screen mode
-    //             document.msExitFullscreen();
-    //         }
-    //         isVideoOnFullScreen = false;
-    //         videoPlayer.style.pointerEvents = 'auto';
-    //         // console.log("Esc FS isVideoOnFullScreen", isVideoOnFullScreen);
-    //     }
-    // }
 
     function handleFSVideo() {
         // alert('handleFSVideo 1');
@@ -2314,6 +2309,7 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
 
     // alert('handleVideoPlayerFs last');
 }
+
 
 /**
  * Handle file drag and drop on video element

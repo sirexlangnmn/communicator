@@ -23,7 +23,6 @@ function getAspectRatio() {
  * @param {integer} index ratios index
  */
 function setAspectRatio(index) {
-    console.log('rex 3 - setAspectRation');
     aspect = index;
     ratio = getAspectRatio();
     resizeVideoMedia();
@@ -59,7 +58,6 @@ function Area(Increment, Count, Width, Height, Margin = 10) {
  * Resize video elements
  */
 function resizeVideoMedia() {
-    console.log('rex 2 - resizeVideoMedia');
     let Margin = 3;
     let videoMediaContainer = getId('videoMediaContainer');
     let Width = videoMediaContainer.offsetWidth - Margin * 2;
@@ -84,8 +82,15 @@ function resizeVideoMedia() {
     }
 
     max = max - Margin * 2;
-    // setWidth(videoMediaContainer, Cameras, max, bigWidth, Margin, Height);
-    setWidth(videoMediaContainer, Cameras, max, bigWidth, Margin, Height);
+    
+    if (globalClickedPeerId) {
+        let w = window.innerWidth;
+        let h = window.innerHeight;
+        setWidthOfFullScreenOfClickedPeerId(videoMediaContainer, Cameras, w, h, globalClickedPeerId)
+    } else {
+        setWidth(videoMediaContainer, Cameras, max, bigWidth, Margin, Height);
+    }
+   
 }
 
 /**
@@ -121,15 +126,13 @@ function setWidth(videoMediaContainer, Cameras, width, bigWidth, margin, maxHeig
     }
 }
 
-function videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id) {
+function setWidthOfFullScreenOfClickedPeerId(videoMediaContainer, Cameras, width, height, peer_id) {
     var obj = document.getElementById(peer_id + '_videoWrap');
     // Object.assign(obj.style, styles);
     const index =Array.from(obj.parentNode.children).indexOf(obj);
     // const index = 1;
 
-   
-
-    console.log('rex 1 - videoFullScreenSetWidth');
+    console.log('rex 2 - setWidthOfFullScreenOfClickedPeerId');
     console.log('videoMediaContainer', videoMediaContainer);
     console.log('Cameras', Cameras);
     console.log('Cameras.length', Cameras.length);
@@ -150,8 +153,7 @@ function videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id) {
         Object.assign(obj.style, displayNone);
     }
     
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+   
 
     var customStyles = {
         "display": "block",
@@ -173,7 +175,7 @@ function videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id) {
 
 
 // it works on 1 participants only
-// function videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id) {
+// function setWidthOfFullScreenOfClickedPeerId(videoMediaContainer, Cameras, peer_id) {
 //     var obj = document.getElementById(peer_id + '_videoWrap');
 //     Object.assign(obj.style, styles);
 //     const index =Array.from(obj.parentNode.children).indexOf(obj);
@@ -181,7 +183,7 @@ function videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id) {
 
    
 
-//     console.log('rex 1 - videoFullScreenSetWidth');
+//     console.log('rex 1 - setWidthOfFullScreenOfClickedPeerId');
 //     console.log('videoMediaContainer', videoMediaContainer);
 //     console.log('Cameras', Cameras);
 //     console.log('Cameras.length', Cameras.length);
@@ -213,16 +215,37 @@ function videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id) {
         
 // }
 
-window.addEventListener('resize', reportWindowSize);
 
-function reportWindowSize() {
-    console.log('window.innerHeight: ' + window.innerHeight);
-    console.log('window.innerWidth: ' + window.innerWidth);
-}
+
+
+// window.addEventListener('resize', reportWindowSize);
+
+// function reportWindowSize() {
+//     if (peer_id) {
+//         console.log('window.innerHeight: ' + window.innerHeight);
+//         console.log('window.innerWidth: ' + window.innerWidth);
+//     }
+// }
+
+
+// window.addEventListener("resize", displayWindowSize);
+// function displayWindowSize(){
+//     // Get width and height of the window excluding scrollbars
+//     var w = document.documentElement.clientWidth;
+//     var h = document.documentElement.clientHeight;
+    
+//     if (peer_id) {
+//         // Display result inside a div elements
+//         console.log("Width: " + w + ", " + "Height: " + h);
+//     }
+   
+// }
 
 /**
  * Handle window event listener
  */
+// I comment this code because hindrance to me code related to window resize event
+
 window.addEventListener(
     'load',
     function (event) {
