@@ -23,6 +23,7 @@ function getAspectRatio() {
  * @param {integer} index ratios index
  */
 function setAspectRatio(index) {
+    console.log('rex 3 - setAspectRation');
     aspect = index;
     ratio = getAspectRatio();
     resizeVideoMedia();
@@ -58,6 +59,7 @@ function Area(Increment, Count, Width, Height, Margin = 10) {
  * Resize video elements
  */
 function resizeVideoMedia() {
+    console.log('rex 2 - resizeVideoMedia');
     let Margin = 3;
     let videoMediaContainer = getId('videoMediaContainer');
     let Width = videoMediaContainer.offsetWidth - Margin * 2;
@@ -96,6 +98,13 @@ function resizeVideoMedia() {
  * @param {integer} maxHeight
  */
 function setWidth(videoMediaContainer, Cameras, width, bigWidth, margin, maxHeight) {
+    console.log('rex 1 - setWidth');
+    console.log('videoMediaContainer', videoMediaContainer);
+    console.log('Cameras', Cameras);
+    console.log('width', width);
+    console.log('bigWidth', bigWidth);
+    console.log('margin', margin);
+    console.log('maxHeight', maxHeight);
     
     ratio = customRatio ? 0.68 : ratio;
     let isOneVideoElement = videoMediaContainer.childElementCount == 1 ? true : false;
@@ -113,43 +122,103 @@ function setWidth(videoMediaContainer, Cameras, width, bigWidth, margin, maxHeig
 }
 
 function videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id) {
+    var obj = document.getElementById(peer_id + '_videoWrap');
+    // Object.assign(obj.style, styles);
+    const index =Array.from(obj.parentNode.children).indexOf(obj);
+    // const index = 1;
+
+   
+
+    console.log('rex 1 - videoFullScreenSetWidth');
+    console.log('videoMediaContainer', videoMediaContainer);
+    console.log('Cameras', Cameras);
+    console.log('Cameras.length', Cameras.length);
+    console.log('Cameras[0]', Cameras[0]);
+    console.log('Cameras[1]', Cameras[1]);
+    console.log('peer_id', peer_id);
+    console.log('index', index);
+    console.log(' Cameras[*]',  Cameras[index]);
       
-    let w = window.innerWidth;
-    let h = window.innerHeight;
-    ratio = customRatio ? 0.68 : ratio;
-    var styles = {
-        "width": w+"px",
-        "height": h+"px"
+
+    var displayNone = {
+        "display": "none",
+    };
+
+    for (let s = 0; s < Cameras.length; s++) {
+        let ids = document.getElementsByClassName('Camera')[s].id;
+        var obj = document.getElementById(ids);
+        Object.assign(obj.style, displayNone);
+    }
+    
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    var customStyles = {
+        "display": "block",
+        "width": width+"px",
+        "height": height+"px"
     };
         
     if (peer_id) {
         var obj = document.getElementById(peer_id + '_videoWrap');
-        Object.assign(obj.style, styles);
-
-        Cameras[0].style.width = 0 + 'px';
-        Cameras[0].style.margin = 0 + 'px';
-        Cameras[0].style.height = 0 * ratio + 'px';
-        
-        Cameras[0].style.width = 0 + 'px';
-        Cameras[0].style.height = 0 * ratio + 'px';
-        let camHeigh = Cameras[0].style.height.substring(0, Cameras[0].style.height.length - 2);
-        if (camHeigh >= maxHeight) Cameras[0].style.height = maxHeight - 2 + 'px';
+        Object.assign(obj.style, customStyles);
     } else {
         var obj = document.getElementById('myVideoWrap');
-        Object.assign(obj.style, styles);
-
-        Cameras[1].style.width = 0 + 'px';
-        Cameras[1].style.margin = 0 + 'px';
-        Cameras[1].style.height = 0 * ratio + 'px';
-        
-        Cameras[1].style.width = 0 + 'px';
-        Cameras[1].style.height = 0 * ratio + 'px';
-        let camHeigh = Cameras[1].style.height.substring(0, Cameras[1].style.height.length - 2);
-        if (camHeigh >= maxHeight) Cameras[1].style.height = maxHeight - 2 + 'px';
+        Object.assign(obj.style, customStyles);
     }
         
 }
 
+
+
+
+// it works on 1 participants only
+// function videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id) {
+//     var obj = document.getElementById(peer_id + '_videoWrap');
+//     Object.assign(obj.style, styles);
+//     const index =Array.from(obj.parentNode.children).indexOf(obj);
+//     // const index = 1;
+
+   
+
+//     console.log('rex 1 - videoFullScreenSetWidth');
+//     console.log('videoMediaContainer', videoMediaContainer);
+//     console.log('Cameras', Cameras);
+//     console.log('Cameras.length', Cameras.length);
+//     console.log('Cameras[0]', Cameras[0]);
+//     console.log('Cameras[1]', Cameras[1]);
+//     console.log('peer_id', peer_id);
+//     console.log('index', index);
+//     console.log(' Cameras[*]',  Cameras[index]);
+      
+//     let width = window.innerWidth;
+//     let height = window.innerHeight;
+    
+//     var styles = {
+//         "width": width+"px",
+//         "height": height+"px"
+//     };
+        
+//     var obj = document.getElementById(peer_id + '_videoWrap');
+//     Object.assign(obj.style, styles);
+
+//     Cameras[0].style.width = 0 + 'px';
+//     Cameras[0].style.margin = 0 + 'px';
+//     Cameras[0].style.height = 0 * 0 + 'px';
+    
+//     Cameras[0].style.width = 0 + 'px';
+//     Cameras[0].style.height = 0 * 0 + 'px';
+//     let camHeigh = Cameras[0].style.height.substring(0, Cameras[0].style.height.length - 2);
+//     if (camHeigh >= maxHeight) Cameras[0].style.height = maxHeight - 2 + 'px';
+        
+// }
+
+window.addEventListener('resize', reportWindowSize);
+
+function reportWindowSize() {
+    console.log('window.innerHeight: ' + window.innerHeight);
+    console.log('window.innerWidth: ' + window.innerWidth);
+}
 
 /**
  * Handle window event listener

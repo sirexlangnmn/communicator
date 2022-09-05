@@ -1840,6 +1840,7 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     const remotePeerKickOut = document.createElement('button');
     const remoteVideoToImgBtn = document.createElement('button');
     const remoteVideoFullScreenBtn = document.createElement('button');
+    const remoteCloseVideoFullScreenBtn = document.createElement('button');
     const remoteVideoAvatarImage = document.createElement('img');
     const remotePitchMeter = document.createElement('div');
     const remotePitchBar = document.createElement('div');
@@ -1897,6 +1898,9 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     remoteVideoFullScreenBtn.setAttribute('id', peer_id + '_fullScreen');
     remoteVideoFullScreenBtn.className = 'fas fa-expand';
 
+    remoteCloseVideoFullScreenBtn.setAttribute('id', peer_id + '_closeFullScreen');
+    remoteCloseVideoFullScreenBtn.className = 'fas fa-minimize';
+
     // no mobile devices
     if (!isMobileDevice) {
         setTippy(remoteVideoParagraph, 'Participant name', 'bottom');
@@ -1909,6 +1913,7 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
         setTippy(remoteVideoToImgBtn, 'Take a snapshot', 'bottom');
         setTippy(remotePeerKickOut, 'Kick out', 'bottom');
         setTippy(remoteVideoFullScreenBtn, 'Full screen mode', 'bottom');
+        setTippy(remoteCloseVideoFullScreenBtn, 'Close full screen mode', 'bottom');
     }
 
     // my video avatar image
@@ -1936,6 +1941,7 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     remoteStatusMenu.appendChild(remoteVideoToImgBtn);
     if (buttons.remote.showKickOutBtn) remoteStatusMenu.appendChild(remotePeerKickOut);
     remoteStatusMenu.appendChild(remoteVideoFullScreenBtn);
+    remoteStatusMenu.appendChild(remoteCloseVideoFullScreenBtn);
 
     remoteMedia.setAttribute('id', peer_id + '_video');
     remoteMedia.setAttribute('playsinline', true);
@@ -2169,6 +2175,26 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
         videoFullScreenSetWidth(videoMediaContainer, Cameras, peer_id);
         // gotoFS();
     });
+
+    if (peer_id) {
+        let closeFullScreenElementId = getId(peer_id + '_closeFullScreen');
+        closeFullScreenElementId.addEventListener('click', (e) => {
+            let Cameras = getEcN('Camera');
+
+            var displayNone = {
+                "display": "",
+            };
+        
+            for (let s = 0; s < Cameras.length; s++) {
+                let ids = document.getElementsByClassName('Camera')[s].id;
+                var obj = document.getElementById(ids);
+                Object.assign(obj.style, displayNone);
+            }
+
+            // setAspectRatio(0); // 16:9
+            resizeVideoMedia();
+        });
+    }
 
     // on video click go on FS
     videoPlayer.addEventListener('click', (e) => {
