@@ -40,6 +40,7 @@
         <!-- StyleSheet -->
 
         <link rel="stylesheet" href="../css/client.css" />
+        <link rel="stylesheet" href="../css/client.custom.css" />
         <link rel="stylesheet" href="../css/videoGrid.css" />
         <link rel="stylesheet" href="../css/whiteboard.css" />
 
@@ -50,6 +51,8 @@
         <!-- https://animate.style 4 using for swal fadeIn-Out -->
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+
     </head>
 
     <body onload="initClientPeer()">
@@ -106,9 +109,9 @@ access to use this app.
                 <header id="msgerHeader" class="msger-header">
                     <div class="msger-header-title"><button id="msgerClose" class="fas fa-times"></button></div>
                     <div class="msger-header-options">
-                        <button id="msgerTheme" class="fas fa-ghost"></button>
-                        <button id="msgerSaveBtn" class="fas fa-save"></button>
-                        <button id="msgerClean" class="fas fa-trash"></button>
+                        <button id="msgerTheme" class="fas fa-ghost" style="display: none;"></button>
+                        <button id="msgerSaveBtn" class="fas fa-save" style="display: none;"></button>
+                        <button id="msgerClean" class="fas fa-trash" ></button>
                     </div>
                 </header>
 
@@ -133,9 +136,9 @@ access to use this app.
                         class="msger-input"
                         placeholder="💬 Enter your message..."
                     ></textarea>
-                    <button id="msgerEmojiBtn" class="fas fa-smile"></button>
-                    <button id="msgerMarkdownBtn" class="fab fa-markdown"></button>
-                    <button id="msgerVideoUrlBtn" class="fab fa-youtube"></button>
+                    <button id="msgerEmojiBtn" class="fas fa-smile" style="display: none;"></button>
+                    <button id="msgerMarkdownBtn" class="fab fa-markdown" style="display: none;"></button>
+                    <button id="msgerVideoUrlBtn" class="fab fa-youtube" style="display: none;"></button>
                     <button id="msgerCPBtn" class="fas fa-users"></button>
                     <button id="msgerSendBtn" class="fas fa-paper-plane"></button>
                 </div>
@@ -181,8 +184,8 @@ access to use this app.
                         <button id="captionClose" class="fas fa-times"></button>
                     </div>
                     <div class="msger-header-options">
-                        <button id="captionTheme" class="fas fa-ghost"></button>
-                        <button id="captionSaveBtn" class="fas fa-save"></button>
+                        <button id="captionTheme" class="fas fa-ghost" style="display: none;"></button>
+                        <button id="captionSaveBtn" class="fas fa-save" style="display: none;"></button>
                         <button id="captionClean" class="fas fa-trash"></button>
                     </div>
                 </header>
@@ -422,6 +425,46 @@ access to use this app.
 
         <div id="videoMediaContainer">
             <!-- <div class="Camera"></div> -->
+        </div>
+
+        <div  style="box-sizing: border-box;">
+
+        <!-- <section id="" class="" style="box-sizing: border-box;"> -->
+            <section id="layout1" class="layout1" >
+                <div class="row">
+                    <div class="column">
+                      <div class="card">
+                        <h3>Card 1</h3>
+                        <p>Some text</p>
+                        <p>Some text</p>
+                      </div>
+                    </div>
+                  
+                    <!-- <div class="column">
+                      <div class="card">
+                        <h3>Card 2</h3>
+                        <p>Some text</p>
+                        <p>Some text</p>
+                      </div>
+                    </div>
+                    
+                    <div class="column">
+                      <div class="card">
+                        <h3>Card 3</h3>
+                        <p>Some text</p>
+                        <p>Some text</p>
+                      </div>
+                    </div>
+                    
+                    <div class="column">
+                      <div class="card">
+                        <h3>Card 4</h3>
+                        <p>Some text</p>
+                        <p>Some text</p>
+                      </div>
+                    </div> -->
+                  </div>            
+            </section>
         </div>
 
         <!-- End Video container -->

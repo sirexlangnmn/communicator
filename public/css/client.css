@@ -174,7 +174,8 @@ body {
     flex-direction: column;
     justify-content: space-around;
     grid-gap: .8rem;
-    width: 40px;
+    /* width: 40px; */
+    width: 60px;
     -webkit-animation: fadeIn ease-in 1;
     -moz-animation: fadeIn ease-in 1;
     animation: fadeIn ease-in 1;

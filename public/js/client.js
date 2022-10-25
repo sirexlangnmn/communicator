@@ -1748,6 +1748,7 @@ async function loadLocalMedia(stream) {
     videoWrap.appendChild(myPitchMeter);
 
     getId('videoMediaContainer').appendChild(videoWrap);
+    // getId('layout1').appendChild(videoWrap);
     videoWrap.style.display = 'none';
 
     logStreamSettingsInfo('localMediaStream', localMediaStream);
@@ -1841,6 +1842,7 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     const remoteVideoToImgBtn = document.createElement('button');
     const remoteVideoFullScreenBtn = document.createElement('button');
     const remoteCloseVideoFullScreenBtn = document.createElement('button');
+    const remoteActiveSpeakerViewBtn = document.createElement('button');
     const remoteVideoAvatarImage = document.createElement('img');
     const remotePitchMeter = document.createElement('div');
     const remotePitchBar = document.createElement('div');
@@ -1901,6 +1903,9 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     remoteCloseVideoFullScreenBtn.setAttribute('id', peer_id + '_closeFullScreen');
     remoteCloseVideoFullScreenBtn.className = 'fas fa-minimize';
 
+    remoteActiveSpeakerViewBtn.setAttribute('id', peer_id + '_activeSpeakerView');
+    remoteActiveSpeakerViewBtn.className = 'fas fa-th-list';
+
     // no mobile devices
     if (!isMobileDevice) {
         setTippy(remoteVideoParagraph, 'Participant name', 'bottom');
@@ -1914,6 +1919,8 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
         setTippy(remotePeerKickOut, 'Kick out', 'bottom');
         setTippy(remoteVideoFullScreenBtn, 'Full screen mode', 'bottom');
         setTippy(remoteCloseVideoFullScreenBtn, 'Close full screen mode', 'bottom');
+        setTippy(remoteActiveSpeakerViewBtn, 'Active Speaker View', 'bottom');
+        
     }
 
     // my video avatar image
@@ -1942,6 +1949,8 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
     if (buttons.remote.showKickOutBtn) remoteStatusMenu.appendChild(remotePeerKickOut);
     remoteStatusMenu.appendChild(remoteVideoFullScreenBtn);
     remoteStatusMenu.appendChild(remoteCloseVideoFullScreenBtn);
+    remoteStatusMenu.appendChild(remoteActiveSpeakerViewBtn);
+    
 
     remoteMedia.setAttribute('id', peer_id + '_video');
     remoteMedia.setAttribute('playsinline', true);
@@ -1963,6 +1972,8 @@ async function loadRemoteMediaStream(stream, peers, peer_id) {
 
     // append all elements to videoMediaContainer
     getId('videoMediaContainer').appendChild(remoteVideoWrap);
+    // getId('layout1').appendChild(remoteVideoWrap);
+
     // attachMediaStream is a part of the adapter.js library
     attachMediaStream(remoteMedia, remoteMediaStream);
     // resize video elements
@@ -2035,6 +2046,7 @@ function logStreamSettingsInfo(name, stream) {
  *    0      1       2      3      4
  */
 function adaptAspectRatio() {
+    // alert('adaptAspectRatio');
     let participantsCount = getId('videoMediaContainer').childElementCount;
     let desktop,
         mobile = 1;
@@ -2143,7 +2155,6 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
 
     // handle Chrome Firefox Opera Microsoft Edge videoPlayer ESC
     videoPlayer.addEventListener('fullscreenchange', (e) => {
-        // alert('fullscreenchange');
         // if Controls enabled, or document on FS do nothing
         if (videoPlayer.controls || isDocumentOnFullScreen) return;
         let fullscreenElement = document.fullscreenElement;
@@ -2158,7 +2169,6 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
 
     // handle Safari videoPlayer ESC
     videoPlayer.addEventListener('webkitfullscreenchange', (e) => {
-        //  alert('webkitfullscreenchange');
 
         // if Controls enabled, or document on FS do nothing
         if (videoPlayer.controls || isDocumentOnFullScreen) return;
@@ -2172,7 +2182,6 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
 
     // on button click go on FS mobile/desktop
     videoFullScreenBtn.addEventListener('click', (e) => {
-        // alert('videoFullScreenBtn click');
        
         globalClickedPeerId = peer_id;
         let Cameras = getEcN('Camera');
@@ -2187,7 +2196,7 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
         let closeFullScreenElementId = getId(peer_id + '_closeFullScreen');
         closeFullScreenElementId.addEventListener('click', (e) => {
             globalClickedPeerId = null;
-            
+
             let Cameras = getEcN('Camera');
 
             var displayNone = {
@@ -2202,30 +2211,25 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
 
             resizeVideoMedia();
         });
+
+        let activeSpeakerViewElementId = getId(peer_id + '_activeSpeakerView');
+        let layout1 = getId('layout1');
+        activeSpeakerViewElementId.addEventListener('click', (e) => {
+            globalClickedPeerId = peer_id;
+
+           
+            layout1.style.display = 'block';
+
+            let Cameras = getEcN('Camera');
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+
+            setWidthOfFullScreenOfClickedPeerIdAndOtheViewer(videoMediaContainer, Cameras, width, height, peer_id);
+        });
     }
-
-    // if (peer_id) {
-    //     window.addEventListener('resize', reportWindowSize);
-
-    //     function reportWindowSize() {
-    //         let Cameras = getEcN('Camera');
-    //         // let width = window.innerWidth;
-    //         // let height = window.innerHeight;
-
-    //         let width = document.documentElement.clientWidth;
-    //         let height = document.documentElement.clientHeight;
-    //         console.log('peer_id sa loob ng resize', peer_id);
-    
-    //         // setWidthOfFullScreenOfClickedPeerId(videoMediaContainer, Cameras, width, height, peer_id);
-            
-    //     }
-    // }
    
-
-
     // on video click go on FS
     videoPlayer.addEventListener('click', (e) => {
-        // alert('videoPlayer click');
         // not mobile on click go on FS or exit from FS
         if (!isMobileDevice) {
             gotoFS();
@@ -2236,10 +2240,8 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
     });
 
     function gotoFS() {
-        // alert('gotoFS');
         // handle remote peer video fs
         if (peer_id !== null) {
-            // alert('handleVideoPlayerFs gotoFS NOT null');
             let remoteVideoStatusBtn = getId(peer_id + '_videoStatus');
             if (remoteVideoStatusBtn.className === 'fas fa-video') {
                 handleFSVideo();
@@ -2247,7 +2249,6 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
                 showMsg();
             }
         } else {
-            // alert('handleVideoPlayerFs gotoFS NULL');
             // handle local video fs
             if (myVideoStatusIcon.className === 'fas fa-video' || isScreenStreaming) {
                 handleFSVideo();
@@ -2267,7 +2268,6 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
 
 
     function handleFSVideo() {
-        // alert('handleFSVideo 1');
         // // if Controls enabled, or document on FS do nothing
         // if (videoPlayer.controls || isDocumentOnFullScreen) return;
         console.log('handleFSVideo 1');
@@ -2290,7 +2290,6 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
             videoPlayer.style.pointerEvents = 'none';
             // console.log("Go on FS isVideoOnFullScreen", isVideoOnFullScreen);
         } else {
-        //     // alert('handleFSVideo 2');
         //     if (document.exitFullscreen) {
         //         // Chrome Firefox Opera Microsoft Edge
         //         document.exitFullscreen();
@@ -2307,7 +2306,6 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
         }
     }
 
-    // alert('handleVideoPlayerFs last');
 }
 
 

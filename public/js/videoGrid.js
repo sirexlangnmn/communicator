@@ -128,21 +128,7 @@ function setWidth(videoMediaContainer, Cameras, width, bigWidth, margin, maxHeig
 
 function setWidthOfFullScreenOfClickedPeerId(videoMediaContainer, Cameras, width, height, peer_id) {
     var obj = document.getElementById(peer_id + '_videoWrap');
-    // Object.assign(obj.style, styles);
-    const index =Array.from(obj.parentNode.children).indexOf(obj);
-    // const index = 1;
-
-    console.log('rex 2 - setWidthOfFullScreenOfClickedPeerId');
-    console.log('videoMediaContainer', videoMediaContainer);
-    console.log('Cameras', Cameras);
-    console.log('Cameras.length', Cameras.length);
-    console.log('Cameras[0]', Cameras[0]);
-    console.log('Cameras[1]', Cameras[1]);
-    console.log('peer_id', peer_id);
-    console.log('index', index);
-    console.log(' Cameras[*]',  Cameras[index]);
       
-
     var displayNone = {
         "display": "none",
     };
@@ -153,8 +139,6 @@ function setWidthOfFullScreenOfClickedPeerId(videoMediaContainer, Cameras, width
         Object.assign(obj.style, displayNone);
     }
     
-   
-
     var customStyles = {
         "display": "block",
         "width": width+"px",
@@ -172,74 +156,68 @@ function setWidthOfFullScreenOfClickedPeerId(videoMediaContainer, Cameras, width
 }
 
 
+function setWidthOfFullScreenOfClickedPeerIdAndOtheViewer(videoMediaContainer, Cameras, width, height, peer_id) {
+    var obj = document.getElementById(peer_id + '_videoWrap');
+    // Object.assign(obj.style, styles);
+    const index =Array.from(obj.parentNode.children).indexOf(obj);
+    // const index = 1;
 
-
-// it works on 1 participants only
-// function setWidthOfFullScreenOfClickedPeerId(videoMediaContainer, Cameras, peer_id) {
-//     var obj = document.getElementById(peer_id + '_videoWrap');
-//     Object.assign(obj.style, styles);
-//     const index =Array.from(obj.parentNode.children).indexOf(obj);
-//     // const index = 1;
-
-   
-
-//     console.log('rex 1 - setWidthOfFullScreenOfClickedPeerId');
-//     console.log('videoMediaContainer', videoMediaContainer);
-//     console.log('Cameras', Cameras);
-//     console.log('Cameras.length', Cameras.length);
-//     console.log('Cameras[0]', Cameras[0]);
-//     console.log('Cameras[1]', Cameras[1]);
-//     console.log('peer_id', peer_id);
-//     console.log('index', index);
-//     console.log(' Cameras[*]',  Cameras[index]);
+    console.log('rex 2 - setWidthOfFullScreenOfClickedPeerIdAndOtheViewer');
+    console.log('videoMediaContainer', videoMediaContainer);
+    console.log('Cameras', Cameras);
+    console.log('Cameras.length', Cameras.length);
+    console.log('Cameras[0]', Cameras[0]);
+    console.log('Cameras[1]', Cameras[1]);
+    console.log('peer_id', peer_id);
+    console.log('index', index);
+    console.log(' Cameras[*]',  Cameras[index]);
       
-//     let width = window.innerWidth;
-//     let height = window.innerHeight;
+
+    // var displayNone = {
+    //     "display": "none",
+    // };
+
+    // for (let s = 0; s < Cameras.length; s++) {
+    //     let ids = document.getElementsByClassName('Camera')[s].id;
+    //     var obj = document.getElementById(ids);
+    //     Object.assign(obj.style, displayNone);
+    // }
     
-//     var styles = {
-//         "width": width+"px",
-//         "height": height+"px"
-//     };
-        
-//     var obj = document.getElementById(peer_id + '_videoWrap');
-//     Object.assign(obj.style, styles);
-
-//     Cameras[0].style.width = 0 + 'px';
-//     Cameras[0].style.margin = 0 + 'px';
-//     Cameras[0].style.height = 0 * 0 + 'px';
-    
-//     Cameras[0].style.width = 0 + 'px';
-//     Cameras[0].style.height = 0 * 0 + 'px';
-//     let camHeigh = Cameras[0].style.height.substring(0, Cameras[0].style.height.length - 2);
-//     if (camHeigh >= maxHeight) Cameras[0].style.height = maxHeight - 2 + 'px';
-        
-// }
-
-
-
-
-// window.addEventListener('resize', reportWindowSize);
-
-// function reportWindowSize() {
-//     if (peer_id) {
-//         console.log('window.innerHeight: ' + window.innerHeight);
-//         console.log('window.innerWidth: ' + window.innerWidth);
-//     }
-// }
-
-
-// window.addEventListener("resize", displayWindowSize);
-// function displayWindowSize(){
-//     // Get width and height of the window excluding scrollbars
-//     var w = document.documentElement.clientWidth;
-//     var h = document.documentElement.clientHeight;
-    
-//     if (peer_id) {
-//         // Display result inside a div elements
-//         console.log("Width: " + w + ", " + "Height: " + h);
-//     }
    
-// }
+
+    var customStyles = {
+        "display": "block",
+        "width": width+"px",
+        "height": height+"px"
+    };
+        
+    if (peer_id) {
+        var obj = document.getElementById(peer_id + '_videoWrap');
+        Object.assign(obj.style, customStyles);
+    } else {
+        var obj = document.getElementById('myVideoWrap');
+        Object.assign(obj.style, customStyles);
+    }
+
+    var cssStyle = {
+        "display": "",
+        "width": "200px",
+        "height": "200px"
+    };
+
+    for (let s = 0; s < Cameras.length; s++) {
+        let ids = document.getElementsByClassName('Camera')[s].id;
+        var obj = document.getElementById(ids);
+        Object.assign(obj.style, cssStyle);
+
+        getId('layout1').appendChild(Cameras[s]);
+    }
+
+    
+        
+}
+
+
 
 /**
  * Handle window event listener
