@@ -10,6 +10,7 @@
 
 'use strict'; // https://www.w3schools.com/js/js_strict.asp
 
+const signalingServerPort = 3000; // must be the same to server.js PORT
 const isHttps = false; // must be the same on server.js
 const signalingServer = getSignalingServer();
 const roomId = getRoomId();
@@ -582,31 +583,53 @@ async function getPeerGeoLocation() {
  * @returns {string} Signaling server URL
  */
 function getSignalingServer() {
+    // if (isHttps) {
+    //     return 'https://' + location.hostname;
+    // }
+    // return 'http' + (location.hostname == 'localhost' ? '' : 's') + '://' + location.hostname;
+
     if (isHttps) {
         return 'https://' + location.hostname;
     }
-    return 'http' + (location.hostname == 'localhost' ? '' : 's') + '://' + location.hostname;
+    return 'http' + (location.hostname == 'localhost' ? '' : 's') + '://' + location.hostname + ':' + signalingServerPort;
 }
 
 /**
  * Generate random Room id if not set
  * @returns {string} Room Id
  */
+// function getRoomId() {
+//     // chek if passed as params /join?room=id
+//     let qs = new URLSearchParams(window.location.search);
+//     let queryRoomId = qs.get('room');
+
+//     // skip /join/
+//     let roomId = queryRoomId ? queryRoomId : location.pathname.substring(6);
+
+//     // if not specified room id, create one random
+//     if (roomId == '') {
+//         roomId = makeId(20);
+//         const newUrl = signalingServer + '/join/' + roomId;
+//         window.history.pushState({ url: newUrl }, roomId, newUrl);
+//     }
+//     return roomId;
+// }
+
 function getRoomId() {
-    // chek if passed as params /join?room=id
-    let qs = new URLSearchParams(window.location.search);
-    let queryRoomId = qs.get('room');
-
-    // skip /join/
-    let roomId = queryRoomId ? queryRoomId : location.pathname.substring(6);
-
-    // if not specified room id, create one random
-    if (roomId == '') {
-        roomId = makeId(20);
-        const newUrl = signalingServer + '/join/' + roomId;
-        window.history.pushState({ url: newUrl }, roomId, newUrl);
-    }
+    let roomId = location.pathname.substring(6);
     return roomId;
+}
+
+async function validateCommunicatorLink(roomId) {
+    let strippedRoomId = roomId.replace('call/', "");
+    
+    console.log('validateCommunicatorLink roomId: ', roomId)
+    console.log('validateCommunicatorLink strippedRoomId', strippedRoomId);
+    
+    const response = await fetch(`https://allworldtrade.com/api/get/communicator-link/${strippedRoomId}`);
+    const data = await response.json();
+    console.log('validateCommunicatorLink data', data);
+    return data;
 }
 
 /**
@@ -694,39 +717,50 @@ function initClientPeer() {
     isIPadDevice = isIpad(userAgent);
     peerInfo = getPeerInfo();
 
-    console.log('01. Connecting to signaling server');
+    validateCommunicatorLink(roomId).then((data) => {
+        console.log('signalingServer', signalingServer);
+        if (data.message == 'valid') {
+            console.log('01. Connecting to signaling server rex');
+            console.log('01. Connecting to signaling server rex roomId', roomId);
 
-    // Disable the HTTP long-polling transport
-    signalingSocket = io({ transports: ['websocket'] });
+            // Disable the HTTP long-polling transport
+            signalingSocket = io({ transports: ['websocket'] });
 
-    const transport = signalingSocket.io.engine.transport.name; // in most cases, "polling"
-    console.log('02. Connection transport', transport);
+            const transport = signalingSocket.io.engine.transport.name; // in most cases, "polling"
+            console.log('02. Connection transport', transport);
 
-    // Check upgrade transport
-    signalingSocket.io.engine.on('upgrade', () => {
-        const upgradedTransport = signalingSocket.io.engine.transport.name; // in most cases, "websocket"
-        console.log('Connection upgraded transport', upgradedTransport);
-    });
+            // Check upgrade transport
+            signalingSocket.io.engine.on('upgrade', () => {
+                const upgradedTransport = signalingSocket.io.engine.transport.name; // in most cases, "websocket"
+                console.log('Connection upgraded transport', upgradedTransport);
+            });
 
-    // on receiving data from signaling server...
-    signalingSocket.on('connect', handleConnect);
-    signalingSocket.on('roomIsLocked', handleUnlockTheRoom);
-    signalingSocket.on('roomAction', handleRoomAction);
-    signalingSocket.on('addPeer', handleAddPeer);
-    signalingSocket.on('serverInfo', handleServerInfo);
-    signalingSocket.on('sessionDescription', handleSessionDescription);
-    signalingSocket.on('iceCandidate', handleIceCandidate);
-    signalingSocket.on('peerName', handlePeerName);
-    signalingSocket.on('peerStatus', handlePeerStatus);
-    signalingSocket.on('peerAction', handlePeerAction);
-    signalingSocket.on('wbCanvasToJson', handleJsonToWbCanvas);
-    signalingSocket.on('whiteboardAction', handleWhiteboardAction);
-    signalingSocket.on('kickOut', handleKickedOut);
-    signalingSocket.on('fileInfo', handleFileInfo);
-    signalingSocket.on('fileAbort', handleFileAbort);
-    signalingSocket.on('videoPlayer', handleVideoPlayer);
-    signalingSocket.on('disconnect', handleDisconnect);
-    signalingSocket.on('removePeer', handleRemovePeer);
+            // on receiving data from signaling server...
+            signalingSocket.on('connect', handleConnect);
+            signalingSocket.on('roomIsLocked', handleUnlockTheRoom);
+            signalingSocket.on('roomAction', handleRoomAction);
+            signalingSocket.on('addPeer', handleAddPeer);
+            signalingSocket.on('serverInfo', handleServerInfo);
+            signalingSocket.on('sessionDescription', handleSessionDescription);
+            signalingSocket.on('iceCandidate', handleIceCandidate);
+            signalingSocket.on('peerName', handlePeerName);
+            signalingSocket.on('peerStatus', handlePeerStatus);
+            signalingSocket.on('peerAction', handlePeerAction);
+            signalingSocket.on('wbCanvasToJson', handleJsonToWbCanvas);
+            signalingSocket.on('whiteboardAction', handleWhiteboardAction);
+            signalingSocket.on('kickOut', handleKickedOut);
+            signalingSocket.on('fileInfo', handleFileInfo);
+            signalingSocket.on('fileAbort', handleFileAbort);
+            signalingSocket.on('videoPlayer', handleVideoPlayer);
+            signalingSocket.on('disconnect', handleDisconnect);
+            signalingSocket.on('removePeer', handleRemovePeer);
+
+            console.log('message:', data.message);
+            console.log('signalingSocket', signalingSocket);
+        } else {
+            location.replace(signalingServer + '/404');
+        }
+    }); 
 } // end [initClientPeer]
 
 /**

@@ -323,6 +323,10 @@ app.get('*', function (req, res) {
     res.sendFile(views.notFound);
 });
 
+app.get(['/404'], (req, res) => {
+    res.sendFile(views.notFound);
+});
+
 /**
  * You should probably use a different stun-turn server
  * doing commercial stuff, also see:
