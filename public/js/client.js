@@ -591,7 +591,14 @@ function getSignalingServer() {
     if (isHttps) {
         return 'https://' + location.hostname;
     }
-    return 'http' + (location.hostname == 'localhost' ? '' : 's') + '://' + location.hostname + ':' + signalingServerPort;
+    
+    return (
+        'http' +
+        (location.hostname == 'localhost' ? '' : 's') +
+        '://' +
+        location.hostname +
+        (location.hostname == 'localhost' ? ':' + signalingServerPort : '')
+    );
 }
 
 /**
