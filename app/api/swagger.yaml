@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
     title: AllWorldTrade API
-    description: API description for external applications that integrates with MiroTalk.
+    description: API description for external applications that integrates with All World Trade.
     version: 1.0.0
 
 basePath: /api/v1

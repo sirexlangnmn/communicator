@@ -19,7 +19,7 @@
         "nodejs",
         "video"
     ],
-    "author": "Miroslav Pejic",
+    "author": "",
     "license": "AGPL-3.0",
     "homepage": "",
     "dependencies": {
