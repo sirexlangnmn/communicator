@@ -29,4 +29,4 @@ So open it in your browser, join in the room, share it to whom you want and wait
 
 ## Support
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/mirotalk/mirotalk-free-secure-video-calls-chat-screen-sharing)
+

@@ -1,6 +1,6 @@
 ## Expose AllWorldTrade on HTTPS
 
-![mirotalk-https](https.png)
+
 
 1. Generate a `self-signed certificate`
 

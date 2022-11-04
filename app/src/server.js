@@ -135,16 +135,16 @@ const dir = {
 };
 // html views
 const views = {
-    about: path.join(__dirname, '../../', 'public/views/about.html'),
+    // about: path.join(__dirname, '../../', 'public/views/about.html'),
     client: path.join(__dirname, '../../', 'public/views/client.html'),
     // landing: path.join(__dirname, '../../', 'public/views/landing.html'),
     landing: path.join(__dirname, '../../', 'public/views/landing2.html'),
-    newCall: path.join(__dirname, '../../', 'public/views/newcall.html'),
+    // newCall: path.join(__dirname, '../../', 'public/views/newcall.html'),
     // notFound: path.join(__dirname, '../../', 'public/views/404.html'),
     notFound: path.join(__dirname, '../../', 'public/views/404-not-found.html'),
-    permission: path.join(__dirname, '../../', 'public/views/permission.html'),
-    privacy: path.join(__dirname, '../../', 'public/views/privacy.html'),
-    stunTurn: path.join(__dirname, '../../', 'public/views/testStunTurn.html'),
+    // permission: path.join(__dirname, '../../', 'public/views/permission.html'),
+    // privacy: path.join(__dirname, '../../', 'public/views/privacy.html'),
+    // stunTurn: path.join(__dirname, '../../', 'public/views/testStunTurn.html'),
 };
 
 let channels = {}; // collect channels
@@ -181,50 +181,13 @@ app.get(['/'], (req, res) => {
 });
 
 
-// AllWorldTrade about
-// app.get(['/about'], (req, res) => {
-//     res.sendFile(views.about);
-// });
 
-// set new room name and join
-// app.get(['/newcall'], (req, res) => {
-//     res.sendFile(views.newCall);
-// });
-
-// if not allow video/audio
-// app.get(['/permission'], (req, res) => {
-//     res.sendFile(views.permission);
-// });
-
-// privacy policy
-// app.get(['/privacy'], (req, res) => {
-//     res.sendFile(views.privacy);
-// });
-
-// test Stun and Turn connections
-// app.get(['/test'], (req, res) => {
-//     if (Object.keys(req.query).length > 0) {
-//         log.debug('Request Query', req.query);
-//     }
-//     /*
-//         http://localhost:3000/test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
-//         https://p2p.mirotalk.com//test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
-//         https://mirotalk.up.railway.app/test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
-//         https://mirotalk.herokuapp.com/test?iceServers=[{"urls":"stun:stun.l.google.com:19302"},{"urls":"turn:openrelay.metered.ca:443","username":"openrelayproject","credential":"openrelayproject"}]
-//     */
-//     res.sendFile(views.stunTurn);
-// });
 
 // no room name specified to join
 app.get('/join/', (req, res) => {
     if (Object.keys(req.query).length > 0) {
         log.debug('Request Query', req.query);
-        /* 
-            http://localhost:3000/join?room=test&name=mirotalk&audio=1&video=1&screen=1&notify=1
-            https://p2p.mirotalk.com/join?room=test&name=mirotalk&audio=1&video=1&screen=1&notify=1
-            https://mirotalk.up.railway.app/join?room=test&name=mirotalk&audio=1&video=1&screen=1&notify=1
-            https://mirotalk.herokuapp.com/join?room=test&name=mirotalk&audio=1&video=1&screen=1&notify=1
-        */
+        
         const { room, name, audio, video, screen, notify } = req.query;
         // all the params are mandatory for the direct room join
         if (room && name && audio && video && screen && notify) {

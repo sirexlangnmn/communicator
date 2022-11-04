@@ -30,7 +30,7 @@ const messageImg = '../images/message.png';
 const kickedOutImg = '../images/leave-room.png';
 const audioGif = '../images/audio.gif';
 const videoAudioShare = '../images/va-share.png';
-const aboutImg = '../images/mirotalk-logo.png';
+const aboutImg = '';
 // nice free icon: https://www.iconfinder.com
 
 const fileSharingInput = '*'; // allow all file extensions
@@ -120,8 +120,8 @@ let callStartTime;
 let callElapsedTime;
 let recStartTime;
 let recElapsedTime;
-let mirotalkTheme = 'dark'; // dark - grey ...
-let mirotalkBtnsBar = 'vertical'; // vertical - horizontal
+let awtTheme = 'dark'; // dark - grey ...
+let awtBtnsBar = 'vertical'; // vertical - horizontal
 let swalBackground = 'rgba(0, 0, 0, 0.7)'; // black - #16171b - transparent ...
 let peerGeo;
 let myPeerName = getPeerName();
@@ -397,9 +397,9 @@ function getHtmlElementsById() {
     videoQualitySelect = getId('videoQuality');
     videoFpsSelect = getId('videoFps');
     screenFpsSelect = getId('screenFps');
-    themeSelect = getId('mirotalkTheme');
+    themeSelect = getId('awtTheme');
     videoObjFitSelect = getId('videoObjFitSelect');
-    btnsBarSelect = getId('mirotalkBtnsBar');
+    btnsBarSelect = getId('awtBtnsBar');
     tabRoomParticipants = getId('tabRoomParticipants');
     tabRoomSecurity = getId('tabRoomSecurity');
     // my conference name, hand, video - audio status
@@ -862,7 +862,7 @@ async function whoAreYou() {
         allowEscapeKey: false,
         background: swalBackground,
         position: 'center',
-        imageAlt: 'mirotalk-name',
+        imageAlt: 'awt-name',
         // imageUrl: welcomeImg,
         title: 'Enter your name',
         input: 'text',
@@ -938,7 +938,7 @@ function whoAreYouJoin() {
     setPeerAvatarImgName('myVideoAvatarImage', myPeerName);
     setPeerChatAvatarImgName('right', myPeerName);
     joinToChannel();
-    setTheme(mirotalkTheme);
+    setTheme(awtTheme);
 }
 
 /**
@@ -972,7 +972,7 @@ function welcomeUser() {
         background: swalBackground,
         position: 'center',
         title: '<strong>Welcome ' + myPeerName + '</strong>',
-        imageAlt: 'mirotalk-welcome',
+        imageAlt: 'awt-welcome',
         // imageUrl: welcomeImg,
         html:
             `
@@ -1164,7 +1164,7 @@ async function handleRTCDataChannels(peer_id) {
         console.log('handleRTCDataChannels ' + peer_id, event);
         event.channel.onmessage = (msg) => {
             switch (event.channel.label) {
-                case 'mirotalk_chat_channel':
+                case 'awt_chat_channel':
                     try {
                         let dataMessage = JSON.parse(msg.data);
                         switch (dataMessage.type) {
@@ -1179,15 +1179,15 @@ async function handleRTCDataChannels(peer_id) {
                                 break;
                         }
                     } catch (err) {
-                        console.error('mirotalk_chat_channel', err);
+                        console.error('awt_chat_channel', err);
                     }
                     break;
-                case 'mirotalk_file_sharing_channel':
+                case 'awt_file_sharing_channel':
                     try {
                         let dataFile = msg.data;
                         handleDataChannelFileSharing(dataFile);
                     } catch (err) {
-                        console.error('mirotalk_file_sharing_channel', err);
+                        console.error('awt_file_sharing_channel', err);
                     }
                     break;
             }
@@ -1371,8 +1371,8 @@ function handleRemovePeer(config) {
 function setTheme(theme) {
     if (!theme) return;
 
-    mirotalkTheme = theme;
-    switch (mirotalkTheme) {
+    awtTheme = theme;
+    switch (awtTheme) {
         case 'dark':
             // dark theme
             swalBackground = 'radial-gradient(#393939, #000000)';
@@ -1404,7 +1404,7 @@ function setTheme(theme) {
             console.log('No theme found');
     }
 
-    setButtonsBarPosition(mirotalkBtnsBar);
+    setButtonsBarPosition(awtBtnsBar);
 }
 
 /**
@@ -1414,8 +1414,8 @@ function setTheme(theme) {
 function setButtonsBarPosition(position) {
     if (!position || isMobileDevice) return;
 
-    mirotalkBtnsBar = position;
-    switch (mirotalkBtnsBar) {
+    awtBtnsBar = position;
+    switch (awtBtnsBar) {
         case 'vertical':
             document.documentElement.style.setProperty('--btns-top', '50%');
             document.documentElement.style.setProperty('--btns-right', '0px');
@@ -3288,7 +3288,7 @@ async function shareRoomUrl() {
             background: swalBackground,
             position: 'center',
             title: 'Share Room',
-            // imageAlt: 'mirotalk-share',
+            // imageAlt: 'awt-share',
             // imageUrl: shareUrlImg,
             html:
                 `
@@ -3885,7 +3885,7 @@ function downloadRecordedStream() {
  * @param {string} peer_id socket.id
  */
 function createChatDataChannel(peer_id) {
-    chatDataChannels[peer_id] = peerConnections[peer_id].createDataChannel('mirotalk_chat_channel');
+    chatDataChannels[peer_id] = peerConnections[peer_id].createDataChannel('awt_chat_channel');
     chatDataChannels[peer_id].onopen = (event) => {
         console.log('chatDataChannels created', event);
     };
@@ -5681,7 +5681,7 @@ function handleWhiteboardAction(config, logme = true) {
  * @param {string} peer_id socket.id
  */
 function createFileSharingDataChannel(peer_id) {
-    fileDataChannels[peer_id] = peerConnections[peer_id].createDataChannel('mirotalk_file_sharing_channel');
+    fileDataChannels[peer_id] = peerConnections[peer_id].createDataChannel('awt_file_sharing_channel');
     fileDataChannels[peer_id].binaryType = 'arraybuffer';
     fileDataChannels[peer_id].onopen = (event) => {
         console.log('fileDataChannels created', event);
@@ -5837,7 +5837,7 @@ function selectFileToShare(peer_id, broadcast = false) {
     Swal.fire({
         allowOutsideClick: false,
         background: swalBackground,
-        imageAlt: 'mirotalk-file-sharing',
+        imageAlt: 'awt-file-sharing',
         imageUrl: fileSharingImg,
         position: 'center',
         title: 'Share file',
@@ -5973,7 +5973,7 @@ function endDownload() {
                 title: 'Received file',
                 text: incomingFileInfo.file.fileName + ' size ' + bytesToSize(incomingFileInfo.file.fileSize),
                 imageUrl: e.target.result,
-                imageAlt: 'mirotalk-file-img-download',
+                imageAlt: 'awt-file-img-download',
                 showDenyButton: true,
                 confirmButtonText: `Save`,
                 denyButtonText: `Cancel`,
@@ -5994,7 +5994,7 @@ function endDownload() {
         Swal.fire({
             allowOutsideClick: false,
             background: swalBackground,
-            imageAlt: 'mirotalk-file-download',
+            imageAlt: 'awt-file-download',
             imageUrl: fileSharingImg,
             position: 'center',
             title: 'Received file',
@@ -6317,16 +6317,16 @@ function showAbout() {
         background: swalBackground,
         position: 'center',
         title: '<strong>WebRTC P2P</strong>',
-        imageAlt: 'mirotalk-about',
+        imageAlt: 'awt-about',
         imageUrl: aboutImg,
         html: `
         <br/>
         <div id="about">
             <b><a href="" class="umami--click--github" target="_blank">Open Source</a></b> project
             <br/><br/>
-            <button class="pulsate umami--click--sponsor" onclick="window.open('https://github.com/sponsors/miroslavpejic85?o=esb')"><i class="fas fa-heart" ></i>&nbsp;Support</button>
+            <button class="pulsate umami--click--sponsor" onclick="window.open('')"><i class="fas fa-heart" ></i>&nbsp;Support</button>
             <br /><br />
-            Author:<a href="" class="umami--click--linkedin" target="_blank"> Miroslav Pejic</a>
+            Author:<a href="" class="umami--click--linkedin" target="_blank"> </a>
         </div>
         `,
         showClass: {
