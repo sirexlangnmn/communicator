@@ -633,7 +633,7 @@ async function validateCommunicatorLink(roomId) {
     console.log('validateCommunicatorLink roomId: ', roomId)
     console.log('validateCommunicatorLink strippedRoomId', strippedRoomId);
     
-    const response = await fetch(`https://dev.allworldtrade.com/api/get/communicator-link/${strippedRoomId}`);
+    const response = await fetch(`https://allworldtrade.com/api/get/communicator-link/${strippedRoomId}`);
     const data = await response.json();
     console.log('validateCommunicatorLink data', data);
     return data;
