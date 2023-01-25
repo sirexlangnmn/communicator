@@ -726,7 +726,7 @@ function initClientPeer() {
 
     validateCommunicatorLink(roomId).then((data) => {
         console.log('signalingServer', signalingServer);
-        console.log(data);
+        console.log('data.message: ', data);
         if (data.message == 'valid') {
             console.log('01. Connecting to signaling server rex');
             console.log('01. Connecting to signaling server rex roomId', roomId);
