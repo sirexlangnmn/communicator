@@ -928,7 +928,8 @@ async function whoAreYou() {
             whoAreYouJoin();
         },
     }).then(() => {
-        playSound('addPeer');
+        // playSound('addPeer');
+        playSound('addPeer2');
     });
 
     if (isMobileDevice) return;
@@ -1009,8 +1010,8 @@ async function joinToChannel() {
  */
 function welcomeUser() {
     const myRoomUrl = window.location.href;
-    // playSound('newMessage');
-    playSound('addPeer2');
+    playSound('newMessage');
+    // playSound('addPeer2');
     Swal.fire({
         background: swalBackground,
         position: 'center',
