@@ -928,7 +928,7 @@ async function whoAreYou() {
             whoAreYouJoin();
         },
     }).then(() => {
-        playSound('addPeer');
+        playSound('addPeer2');
     });
 
     if (isMobileDevice) return;
