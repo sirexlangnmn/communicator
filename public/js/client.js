@@ -928,8 +928,8 @@ async function whoAreYou() {
             whoAreYouJoin();
         },
     }).then(() => {
-        // playSound('addPeer');
-        playSound('addPeer2');
+        playSound('addPeer');
+        // playSound('addPeer2');
     });
 
     if (isMobileDevice) return;
@@ -1115,7 +1115,8 @@ async function handleAddPeer(config) {
     }
 
     await wbUpdate();
-    playSound('addPeer');
+    // playSound('addPeer');
+    playSound('addPeer2');
 }
 
 /**
