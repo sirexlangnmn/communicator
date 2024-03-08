@@ -893,7 +893,7 @@ async function whoAreYou() {
     if (myPeerName) {
         checkPeerAudioVideo();
         whoAreYouJoin();
-        playSound('addPeer');
+        playSound('addPeer2');
         return;
     }
 
@@ -928,7 +928,7 @@ async function whoAreYou() {
             whoAreYouJoin();
         },
     }).then(() => {
-        playSound('addPeer2');
+        playSound('addPeer');
     });
 
     if (isMobileDevice) return;
