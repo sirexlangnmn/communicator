@@ -893,7 +893,7 @@ async function whoAreYou() {
     if (myPeerName) {
         checkPeerAudioVideo();
         whoAreYouJoin();
-        playSound('addPeer2');
+        playSound('addPeer');
         return;
     }
 
@@ -1009,7 +1009,8 @@ async function joinToChannel() {
  */
 function welcomeUser() {
     const myRoomUrl = window.location.href;
-    playSound('newMessage');
+    // playSound('newMessage');
+    playSound('addPeer2');
     Swal.fire({
         background: swalBackground,
         position: 'center',
