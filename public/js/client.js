@@ -1118,7 +1118,7 @@ async function handleAddPeer(config) {
     // playSound('addPeer');
 
     // playSound('addPeer2');
-    playSound2('addPeer2');
+    playSound4('addPeer2');
 }
 
 /**
@@ -6699,6 +6699,30 @@ async function playSound(name) {
 }
 
 
+async function playSound4(name) {
+    if (!notifyBySound) return;
+
+    let sound = '../sounds/' + name + '.mp3';
+    let audioToPlay = new Audio(sound);
+
+    // Check if the AudioContext is supported (needed for iOS audio)
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) {
+        const context = new AudioContext();
+        const source = context.createMediaElementSource(audioToPlay);
+        source.connect(context.destination);
+    }
+
+    try {
+        // Play audio on user gesture
+        await audioToPlay.play();
+    } catch (err) {
+        console.error("Cannot play sound", err);
+    }
+}
+
+
+
 async function playSound2(name) {
     if (!notifyBySound) return;
 
@@ -6720,6 +6744,31 @@ async function playSound2(name) {
         audioToPlay.play();
     }
 }
+
+
+
+async function playSound3(name) {
+    if (!notifyBySound) return;
+
+    let sound = '../sounds/' + name + '.mp3';
+
+    try {
+        let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let response = await fetch(sound);
+        let audioData = await response.arrayBuffer();
+        let audioBuffer = await audioContext.decodeAudioData(audioData);
+        let source = audioContext.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(audioContext.destination);
+        source.start(0);
+    } catch (err) {
+        console.error("Cannot play sound", err);
+    }
+}
+
+
+
+
 
 /**
  * Open specified URL
