@@ -1116,7 +1116,9 @@ async function handleAddPeer(config) {
 
     await wbUpdate();
     // playSound('addPeer');
-    playSound('addPeer2');
+
+    // playSound('addPeer2');
+    playSound2('addPeer2');
 }
 
 /**
@@ -6693,6 +6695,29 @@ async function playSound(name) {
         // console.error("Cannot play sound", err);
         // Automatic playback failed. (safari)
         return;
+    }
+}
+
+
+async function playSound2(name) {
+    if (!notifyBySound) return;
+
+    // Define the sound file path
+    let sound = '../sounds/' + name + '.mp3';
+
+    // Create an Audio element
+    let audioToPlay = new Audio(sound);
+
+    // Attempt to play the audio
+    try {
+        await audioToPlay.play();
+    } catch (error) {
+        // If playback fails, log the error
+        console.error("Cannot play sound", error);
+
+        // Attempt to play the audio again with a different method
+        audioToPlay.load();
+        audioToPlay.play();
     }
 }
 
