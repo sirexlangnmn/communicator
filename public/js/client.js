@@ -839,7 +839,7 @@ function handleServerInfo(config) {
 
 function sendPeersCountToAPI(peers_count) {
     // Define the URL of your API
-    const apiUrl = `https://allworldtrade.com/api/get/communicator-participants/${peers_count}`;
+    const apiUrl = `https://allworldtrade.com/api/post/communicator-participants/${peers_count}`;
 
     // Data to be sent in the request body
     const data = {
