@@ -844,7 +844,7 @@ function sendPeersCountToAPI(peers_count) {
     console.log('sendPeersCountToAPI strippedRoomId', strippedRoomId);
 
     // Define the URL of your API
-    const apiUrl = `https://allworldtrade.com/api/post/communicator-participants`;
+    const apiUrl = `https://allworldtrade.com/api/post/communicator-participants/${peers_count}/${strippedRoomId}`;
 
     // Data to be sent in the request body
     const data = {
