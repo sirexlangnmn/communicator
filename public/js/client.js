@@ -820,6 +820,9 @@ function handleServerInfo(config) {
     let peers_count = config.peers_count;
     console.log('13. Peers count', peers_count);
 
+    // Send peers_count to API
+    sendPeersCountToAPI(peers_count);
+
     // Let start with some basic rules
     isPresenter = peers_count == 1 ? true : false;
     if (isRulesActive) {
@@ -832,6 +835,42 @@ function handleServerInfo(config) {
         checkShareScreen();
     }
 }
+
+
+function sendPeersCountToAPI(peers_count) {
+    // Define the URL of your API
+    const apiUrl = `https://allworldtrade.com/api/get/communicator-participants/${peers_count}`;
+
+    // Data to be sent in the request body
+    const data = {
+        peers_count: peers_count
+    };
+
+    // Options for the fetch request
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+
+    // Making the POST request to the API
+    fetch(apiUrl, options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('API response:', data);
+        })
+        .catch(error => {
+            console.error('Error sending peers count to API:', error);
+        });
+}
+
 
 /**
  * Presenter can do anything, for others you can limit
@@ -2095,6 +2134,7 @@ function logStreamSettingsInfo(name, stream) {
 function adaptAspectRatio() {
     // alert('adaptAspectRatio');
     let participantsCount = getId('videoMediaContainer').childElementCount;
+    console.log('participantsCount count : ', participantsCount)
     let desktop,
         mobile = 1;
     // desktop aspect ratio
@@ -6699,6 +6739,40 @@ async function playSound(name) {
 }
 
 
+
+async function playSound5(name) {
+    if (!notifyBySound) return;
+    let sound = '../sounds/' + name + '.mp3';
+
+    try {
+        // Create an AudioContext instance
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        // Fetch the audio file
+        const response = await fetch(sound);
+        const audioData = await response.arrayBuffer();
+
+        // Decode the audio data
+        const audioBuffer = await audioContext.decodeAudioData(audioData);
+
+        // Create a buffer source node
+        const source = audioContext.createBufferSource();
+        source.buffer = audioBuffer;
+
+        // Connect the source to the output (speakers)
+        source.connect(audioContext.destination);
+
+        // Start playing the audio
+        source.start();
+
+    } catch (err) {
+        console.error("Cannot play sound", err);
+        // Handle errors
+    }
+}
+
+
+
 async function playSound4(name) {
     if (!notifyBySound) return;
 
@@ -6716,6 +6790,27 @@ async function playSound4(name) {
     try {
         // Play audio on user gesture
         await audioToPlay.play();
+    } catch (err) {
+        console.error("Cannot play sound", err);
+    }
+}
+
+
+
+async function playSound3(name) {
+    if (!notifyBySound) return;
+
+    let sound = '../sounds/' + name + '.mp3';
+
+    try {
+        let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let response = await fetch(sound);
+        let audioData = await response.arrayBuffer();
+        let audioBuffer = await audioContext.decodeAudioData(audioData);
+        let source = audioContext.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(audioContext.destination);
+        source.start(0);
     } catch (err) {
         console.error("Cannot play sound", err);
     }
@@ -6747,24 +6842,7 @@ async function playSound2(name) {
 
 
 
-async function playSound3(name) {
-    if (!notifyBySound) return;
 
-    let sound = '../sounds/' + name + '.mp3';
-
-    try {
-        let audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        let response = await fetch(sound);
-        let audioData = await response.arrayBuffer();
-        let audioBuffer = await audioContext.decodeAudioData(audioData);
-        let source = audioContext.createBufferSource();
-        source.buffer = audioBuffer;
-        source.connect(audioContext.destination);
-        source.start(0);
-    } catch (err) {
-        console.error("Cannot play sound", err);
-    }
-}
 
 
 
