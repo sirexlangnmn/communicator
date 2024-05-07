@@ -839,16 +839,18 @@ function handleServerInfo(config) {
 
 function sendPeersCountToAPI(peers_count) {
     let strippedRoomId = roomId.replace('call/', "");
-    
+    let participantsCount = getId('videoMediaContainer').childElementCount;
+
     console.log('sendPeersCountToAPI roomId: ', roomId)
     console.log('sendPeersCountToAPI strippedRoomId', strippedRoomId);
+    console.log('sendPeersCountToAPI participantsCount : ', participantsCount)
 
     // Define the URL of your API
-    const apiUrl = `https://allworldtrade.com/api/post/communicator-participants/${peers_count}/${strippedRoomId}`;
+    const apiUrl = `https://allworldtrade.com/api/post/communicator-participants/${participantsCount}/${strippedRoomId}`;
 
     // Data to be sent in the request body
     const data = {
-        peers_count: peers_count,
+        peers_count: participantsCount,
         strippedRoomId: strippedRoomId,
     };
 
