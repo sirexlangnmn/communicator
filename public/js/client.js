@@ -768,7 +768,7 @@ function initClientPeer() {
         } else {
             location.replace(signalingServer + '/404');
         }
-    }); 
+    });
 } // end [initClientPeer]
 
 /**
@@ -837,7 +837,7 @@ function handleServerInfo(config) {
 }
 
 
-function sendPeersCountToAPI(peers_count) {
+function sendPeersCountToAPI(participantsCount) {
     let strippedRoomId = roomId.replace('call/', "");
     let participantsCount = getId('videoMediaContainer').childElementCount;
 
@@ -2143,7 +2143,9 @@ function adaptAspectRatio() {
     // alert('adaptAspectRatio');
     let participantsCount = getId('videoMediaContainer').childElementCount;
     console.log('participantsCount count : ', participantsCount)
+
     sendPeersCountToAPI(participantsCount)
+
     let desktop,
         mobile = 1;
     // desktop aspect ratio
