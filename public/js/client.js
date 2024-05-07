@@ -839,7 +839,6 @@ function handleServerInfo(config) {
 
 function sendPeersCountToAPI(participantsCount) {
     let strippedRoomId = roomId.replace('call/', "");
-    let participantsCount = getId('videoMediaContainer').childElementCount;
 
     console.log('sendPeersCountToAPI roomId: ', roomId)
     console.log('sendPeersCountToAPI strippedRoomId', strippedRoomId);
