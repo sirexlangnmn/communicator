@@ -821,7 +821,7 @@ function handleServerInfo(config) {
     console.log('13. Peers count', peers_count);
 
     // Send peers_count to API
-    sendPeersCountToAPI(peers_count);
+    // sendPeersCountToAPI(peers_count);
 
     // Let start with some basic rules
     isPresenter = peers_count == 1 ? true : false;
@@ -2143,6 +2143,7 @@ function adaptAspectRatio() {
     // alert('adaptAspectRatio');
     let participantsCount = getId('videoMediaContainer').childElementCount;
     console.log('participantsCount count : ', participantsCount)
+    sendPeersCountToAPI(participantsCount)
     let desktop,
         mobile = 1;
     // desktop aspect ratio
