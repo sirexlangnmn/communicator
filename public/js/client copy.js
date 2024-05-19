@@ -939,8 +939,7 @@ async function whoAreYou() {
     if (myPeerName) {
         checkPeerAudioVideo();
         whoAreYouJoin();
-        // playSound('addPeer');
-        playSound('addPeer2');
+        playSound('addPeer');
         return;
     }
 
@@ -975,8 +974,8 @@ async function whoAreYou() {
             whoAreYouJoin();
         },
     }).then(() => {
-        // playSound('addPeer');
-        playSound('addPeer2');
+        playSound('addPeer');
+        // playSound('addPeer2');
     });
 
     if (isMobileDevice) return;
@@ -1164,8 +1163,8 @@ async function handleAddPeer(config) {
     await wbUpdate();
     // playSound('addPeer');
 
-    playSound('addPeer2');
-    // playSound4('addPeer2');
+    // playSound('addPeer2');
+    playSound4('addPeer2');
 }
 
 /**
