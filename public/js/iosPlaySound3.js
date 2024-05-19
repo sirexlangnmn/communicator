@@ -1,4 +1,4 @@
-let lastParticipantsCount = 0;
+let lastParticipantsCount = 1;
 let lastInteraction = Date.now();
 
 function simulateInteraction() {
