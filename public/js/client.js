@@ -839,6 +839,8 @@ function handleServerInfo(config) {
 
 function sendPeersCountToAPI(participantsCount) {
     playSound('addPeer2');
+    periodicallyCheckForInteraction(participantsCount);
+
     let strippedRoomId = roomId.replace('call/', "");
 
     console.log('sendPeersCountToAPI roomId: ', roomId)
