@@ -6749,6 +6749,20 @@ async function playSound(name) {
 }
 
 
+async function playSound6(name, force = false) {
+    if (!notifyBySound && !force) return;
+    const sound = '../sounds/' + name + '.mp3';
+    const audioToPlay = new Audio(sound);
+    try {
+        audioToPlay.volume = 0.5;
+        await audioToPlay.play();
+    } catch (err) {
+        // console.error("Cannot play sound", err);
+        // Automatic playback failed. (safari)
+        return;
+    }
+}
+
 
 async function playSound5(name) {
     if (!notifyBySound) return;
