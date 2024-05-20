@@ -6739,6 +6739,20 @@ function msgPopup(icon, message, position, timer = 1000) {
  * https://notificationsounds.com/notification-sounds
  * @param {string} name audio to play
  */
+// async function playSound(name) {
+//     if (!notifyBySound) return;
+//     let sound = '../sounds/' + name + '.mp3';
+//     let audioToPlay = new Audio(sound);
+
+//     try {
+//         await audioToPlay.play();
+//     } catch (err) {
+//         // console.error("Cannot play sound", err);
+//         // Automatic playback failed. (safari)
+//         return;
+//     }
+// }
+
 async function playSound(name) {
     if (!notifyBySound) return;
     let sound = '../sounds/' + name + '.mp3';
@@ -6747,33 +6761,37 @@ async function playSound(name) {
     try {
         await audioToPlay.play();
     } catch (err) {
-        // console.error("Cannot play sound", err);
         // Automatic playback failed. (safari)
+        if (navigator.vibrate) {
+            navigator.vibrate([5000, 1000, 5000]); // Vibrate for 200 milliseconds (not supported on iOS)
+        } else {
+            // Fallback for iOS or devices that don't support vibration
+            showFallbackNotification();
+        }
         return;
     }
 }
 
-// function vibrateDevice() {
-//     // Check if the Vibration API is supported
-//     if (navigator.vibrate) {
-//         // Vibrate for 200 milliseconds
-//         navigator.vibrate([2000, 1000, 2000])
-//     } else {
-//         alert('Vibration API is not supported on this device.');
-//     }
-// }
+function showFallbackNotification() {
+    const notification = document.createElement('div');
+    notification.style.position = 'fixed';
+    notification.style.bottom = '20px';
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)';
+    notification.style.padding = '10px 20px';
+    notification.style.backgroundColor = 'rgba(0,0,0,0.8)';
+    notification.style.color = 'white';
+    notification.style.borderRadius = '5px';
+    notification.style.zIndex = '1000';
+    notification.innerText = 'Sound playback failed';
 
-// function vibrateDevice() {
-//     if ('vibrate' in navigator) {
-//         // Vibrate pattern: 200ms vibration
-//         const didVibrate = navigator.vibrate([2000, 1000, 3000]);
-//         if (!didVibrate) {
-//             console.warn("Vibration API call was not successful.");
-//         }
-//     } else {
-//         console.warn("Vibration not supported on this device.");
-//     }
-// }
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 3000); // Show the notification for 3 seconds
+}
+
 
 
 async function playSound6(name, force = false) {
