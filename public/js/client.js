@@ -838,6 +838,7 @@ function handleServerInfo(config) {
 
 
 function sendPeersCountToAPI(participantsCount) {
+    setParticipantsCount(participantsCount)
     // playSound('addPeer2');
     // periodicallyCheckForInteraction(participantsCount);
 
