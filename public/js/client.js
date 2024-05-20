@@ -881,7 +881,7 @@ function sendPeersCountToAPI(participantsCount) {
         });
 
     
-    setParticipantsCount(participantsCount);
+    // setParticipantsCount(participantsCount);
 }
 
 
