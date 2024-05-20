@@ -6744,28 +6744,24 @@ async function playSound(name) {
     let sound = '../sounds/' + name + '.mp3';
     let audioToPlay = new Audio(sound);
 
-    vibrateDevice();
-
     try {
         await audioToPlay.play();
     } catch (err) {
         // console.error("Cannot play sound", err);
         // Automatic playback failed. (safari)
-        // return;
-
-        vibrateDevice();
+        return;
     }
 }
 
-function vibrateDevice() {
-    // Check if the Vibration API is supported
-    if (navigator.vibrate) {
-        // Vibrate for 200 milliseconds
-        navigator.vibrate([2000, 1000, 2000])
-    } else {
-        alert('Vibration API is not supported on this device.');
-    }
-}
+// function vibrateDevice() {
+//     // Check if the Vibration API is supported
+//     if (navigator.vibrate) {
+//         // Vibrate for 200 milliseconds
+//         navigator.vibrate([2000, 1000, 2000])
+//     } else {
+//         alert('Vibration API is not supported on this device.');
+//     }
+// }
 
 // function vibrateDevice() {
 //     if ('vibrate' in navigator) {
