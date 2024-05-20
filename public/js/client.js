@@ -6745,7 +6745,7 @@ async function playSound(name) {
     let audioToPlay = new Audio(sound);
 
     vibrateDevice();
-    
+
     try {
         await audioToPlay.play();
     } catch (err) {
@@ -6758,16 +6758,23 @@ async function playSound(name) {
 }
 
 function vibrateDevice() {
-    if ('vibrate' in navigator) {
+    if (navigator) {
         // Vibrate pattern: 200ms vibration
-        const didVibrate = navigator.vibrate(200);
-        if (!didVibrate) {
-            console.warn("Vibration API call was not successful.");
-        }
-    } else {
-        console.warn("Vibration not supported on this device.");
+        navigator.vibrate([2000, 1000, 3000]);
     }
 }
+
+// function vibrateDevice() {
+//     if ('vibrate' in navigator) {
+//         // Vibrate pattern: 200ms vibration
+//         const didVibrate = navigator.vibrate([2000, 1000, 3000]);
+//         if (!didVibrate) {
+//             console.warn("Vibration API call was not successful.");
+//         }
+//     } else {
+//         console.warn("Vibration not supported on this device.");
+//     }
+// }
 
 
 async function playSound6(name, force = false) {
