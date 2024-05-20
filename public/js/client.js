@@ -6757,7 +6757,10 @@ async function playSound(name) {
 function vibrateDevice() {
     if ('vibrate' in navigator) {
         // Vibrate pattern: 200ms vibration
-        navigator.vibrate(200);
+        const didVibrate = navigator.vibrate(200);
+        if (!didVibrate) {
+            console.warn("Vibration API call was not successful.");
+        }
     } else {
         console.warn("Vibration not supported on this device.");
     }
