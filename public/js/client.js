@@ -6758,9 +6758,12 @@ async function playSound(name) {
 }
 
 function vibrateDevice() {
-    if (navigator) {
-        // Vibrate pattern: 200ms vibration
-        navigator.vibrate([2000, 1000, 3000]);
+    // Check if the Vibration API is supported
+    if (navigator.vibrate) {
+        // Vibrate for 200 milliseconds
+        navigator.vibrate([2000, 1000, 2000])
+    } else {
+        alert('Vibration API is not supported on this device.');
     }
 }
 
