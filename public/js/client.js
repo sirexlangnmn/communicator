@@ -6743,6 +6743,9 @@ async function playSound(name) {
     if (!notifyBySound) return;
     let sound = '../sounds/' + name + '.mp3';
     let audioToPlay = new Audio(sound);
+
+    vibrateDevice();
+    
     try {
         await audioToPlay.play();
     } catch (err) {
