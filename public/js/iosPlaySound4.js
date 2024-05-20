@@ -10,7 +10,7 @@ function onIncomingCall() {
         playSound('addPeer2');
     } else {
         alert('Please interact with the page to enable sound playback.');
-        playSound('addPeer2');
+        // playSound('addPeer2');
     }
 }
 
