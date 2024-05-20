@@ -4,6 +4,8 @@ let userInteracted = false;
 function simulateInteraction() {
     userInteracted = true;
     lastInteraction = Date.now();
+    console.log("simulateInteraction userInteracted : ", userInteracted);
+    console.log("simulateInteraction lastInteraction : ", lastInteraction);
 }
 
 
@@ -28,6 +30,8 @@ function checkParticipantsCount(participantsCount) {
     if (participantsCount !== lastParticipantsCount) {
         sendPeersCountToAPI(participantsCount);
         lastParticipantsCount = participantsCount;
+        console.log("checkParticipantsCount lastParticipantsCount : ", lastParticipantsCount);
+        console.log("checkParticipantsCount participantsCount : ", participantsCount);
         
         // Attempt to play sound if user has interacted
         if (userInteracted) {
@@ -42,6 +46,6 @@ checkParticipantsCount(getParticipantsCount());
 // Check for changes in participants count periodically
 setInterval(() => {
     const participantsCount = getParticipantsCount();
-    console.log('participantsCount : ', participantsCount)
+    console.log('setInterval participantsCount : ', participantsCount)
     checkParticipantsCount(participantsCount);
 }, 1000);
