@@ -6989,6 +6989,7 @@ function elemDisplay(elem, yes) {
 
 //======
 
+let lastInteraction = Date.now();
 let lastParticipantsCount = 0;
 let userInteracted = false;
 
@@ -7001,10 +7002,10 @@ function simulateInteraction() {
 
 
 
-function sendPeersCountToAPI(participantsCount) {
-    // Your logic to send participantsCount to the API goes here
-    console.log("Sending participants count to API:", participantsCount);
-}
+// function sendPeersCountToAPI(participantsCount) {
+//     // Your logic to send participantsCount to the API goes here
+//     console.log("Sending participants count to API:", participantsCount);
+// }
 
 // Simulate interaction on any document click
 document.addEventListener('click', simulateInteraction);
@@ -7019,7 +7020,7 @@ function getParticipantsCount() {
 // Function to check if participantsCount changed and trigger action accordingly
 function checkParticipantsCount(participantsCount) {
     if (participantsCount !== lastParticipantsCount) {
-        sendPeersCountToAPI(participantsCount);
+        // sendPeersCountToAPI(participantsCount);
         lastParticipantsCount = participantsCount;
         console.log("checkParticipantsCount lastParticipantsCount : ", lastParticipantsCount);
         console.log("checkParticipantsCount participantsCount : ", participantsCount);
@@ -7039,4 +7040,14 @@ setInterval(() => {
     const participantsCount = getParticipantsCount();
     console.log('setInterval participantsCount : ', participantsCount)
     checkParticipantsCount(participantsCount);
-}, 1000);
+}, 5000);
+
+
+// Periodically check for interaction and play sound
+// setInterval(() => {
+//     const timeSinceLastInteraction = Date.now() - lastInteraction;
+//     const thirtyMinutes = 30 * 60 * 1000; // 30 minutes in milliseconds
+//     if (timeSinceLastInteraction <= thirtyMinutes) {
+//         playSound('addPeer2');
+//     }
+// }, 1000); // Check every second
