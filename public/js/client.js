@@ -6748,7 +6748,18 @@ async function playSound(name) {
     } catch (err) {
         // console.error("Cannot play sound", err);
         // Automatic playback failed. (safari)
-        return;
+        // return;
+
+        vibrateDevice();
+    }
+}
+
+function vibrateDevice() {
+    if ('vibrate' in navigator) {
+        // Vibrate pattern: 200ms vibration
+        navigator.vibrate(200);
+    } else {
+        console.warn("Vibration not supported on this device.");
     }
 }
 
