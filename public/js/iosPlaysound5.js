@@ -75,17 +75,31 @@ function setParticipantsCount(newCount) {
 // setParticipantsCount(5);
 
 // On page load, check if user interaction was recent
-window.onload = () => {
-    if (isUserInteractionRecent()) {
-        console.log('User interaction was recently granted.');
-        setupWebRTC();
-    } else {
-        alert('Please interact with the page to enable sound playback.');
-    }
-};
+// window.onload = () => {
+//     if (isUserInteractionRecent()) {
+//         console.log('User interaction was recently granted.');
+//         setupWebRTC();
+//     } else {
+//         alert('Please interact with the page to enable sound playback.');
+//     }
+// };
 
 // Mock function to simulate sending data to an API
 function sendPeersCountToAPI2(participantsCount, interactionState) {
     console.log(`Sending participants count: ${participantsCount}, Interaction state: ${interactionState}`);
     // Implement the actual API call here
 }
+
+
+function initializeApp() {
+    if (isUserInteractionRecent()) {
+        console.log('User interaction was recently granted.');
+        setupWebRTC();
+    } else {
+        console.log('Waiting for user interaction to enable sound playback.');
+    }
+}
+
+
+// Initialize the app on page load
+initializeApp();
