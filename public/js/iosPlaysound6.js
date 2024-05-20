@@ -19,7 +19,8 @@ document.addEventListener('click', simulateInteraction);
 // Sample function to get participants count (replace with your own logic)
 function getParticipantsCount() {
     // Example: return the number of elements with class 'participant'
-    return document.querySelectorAll('.participant').length;
+    // return document.querySelectorAll('.participant').length;
+    return getId('videoMediaContainer').childElementCount;
 }
 
 // Function to check if participantsCount changed and trigger action accordingly
@@ -41,5 +42,6 @@ checkParticipantsCount(getParticipantsCount());
 // Check for changes in participants count periodically
 setInterval(() => {
     const participantsCount = getParticipantsCount();
+    console.log('participantsCount : ', participantsCount)
     checkParticipantsCount(participantsCount);
 }, 1000);
