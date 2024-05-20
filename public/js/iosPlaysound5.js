@@ -72,7 +72,7 @@ function setParticipantsCount(newCount) {
 }
 
 // Example usage: Update participants count
-// setParticipantsCount(5);
+setParticipantsCount(5);
 
 // On page load, check if user interaction was recent
 // window.onload = () => {
